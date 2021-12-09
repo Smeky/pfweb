@@ -3,3 +3,22 @@ body {
     background-color: #131b31;
     color: #ffffff;
 }
+
+a, a:visited, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navigation {
+    display: flex;
+    height: 50px;
+    flex-direction: row;
+    justify-content: end;
+    padding: 6px 20px 6px 0;
+
+    > a {
+        padding: 8px 12px;
+        font-size: 20px;
+        height: 30px;
+    }
+}

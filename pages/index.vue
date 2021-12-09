@@ -1,5 +1,7 @@
 <template>
     <div>
+        <Navigation />
+
         <h1>Index</h1>
 
         <Footer />

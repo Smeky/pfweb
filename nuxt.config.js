@@ -50,5 +50,10 @@ export default {
             scss: { implementation: require("sass") },
             sass: { implementation: require("sass") },
         }
+    },
+
+    router: {
+        linkActiveClass: "router-link",
+        linkExactActiveClass: "router-link-active",
     }
 }
