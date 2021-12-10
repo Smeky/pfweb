@@ -1,7 +1,9 @@
 body {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    background-color: #131b31;
+    background-color: #0d1221;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
 a, a:visited, a:active {
@@ -9,11 +11,17 @@ a, a:visited, a:active {
     color: inherit;
 }
 
+.page {
+    margin-left: 15vw;
+    max-width: 70vw;
+}
+
 .navigation {
     display: flex;
     height: 50px;
     flex-direction: row;
-    justify-content: end;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     padding: 6px 20px 6px 0;
 
     > a {
@@ -21,4 +29,11 @@ a, a:visited, a:active {
         font-size: 20px;
         height: 30px;
     }
+}
+
+footer {
+    width: 100%;    
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
 }

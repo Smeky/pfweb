@@ -1,9 +1,5 @@
 <template>
-    <div>
-        <Navigation />
-
+    <Page>
         <h1>Index</h1>
-
-        <Footer />
-    </div>
+    </Page>
 </template>

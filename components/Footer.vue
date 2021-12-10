@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <footer>
         © {{ new Date().getFullYear() }} Tomas Sobota
-    </div>
+    </footer>
 </template>
