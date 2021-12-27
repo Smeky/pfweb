@@ -1,18 +1,78 @@
+
+const MaxParticleDistance = 300
+const MaxPointSpeed = 100
+const ParticleCount = 200
+
 function distance(first, second) {
     return Math.hypot(second.x - first.x, second.y - first.y)
-    
-    // return Math.sqrt((first.x - second.x) ** 2 + (first.y - second.y) ** 2)
 }
 
-function setupParticle(particle, stageWidth, stageHeight) {
-    const maxPointSpeed = 100
+function createParticleTexture(pixi, app) {
+    const graphics = new pixi.Graphics()
+    graphics.beginFill(0xffffff)
+    graphics.drawCircle(0, 0, 2)
+    graphics.endFill()
 
-    particle.position.x = stageWidth * Math.random()
-    particle.position.y = stageHeight * Math.random()
-    particle.velocity = { 
-        x: maxPointSpeed - Math.random() * (maxPointSpeed * 2),
-        y: maxPointSpeed - Math.random() * (maxPointSpeed * 2),
+    return app.renderer.generateTexture(graphics)
+}
+
+function createParticles(pixi, texture, count, stageWidth, stageHeight) {
+    const particles = []
+    
+    for (let i = 0; i < count; i++) {
+        const scale = 0.1 + Math.random() * 0.9
+        const particle = new pixi.Sprite(texture)
+        
+        particle.id = i + 1
+        particle.alpha = 0.2 + Math.random() * 0.8
+        particle.anchor.set(0.5, 0.5)
+        particle.scale.x = scale
+        particle.scale.y = scale
+        particle.position.x = stageWidth * Math.random()
+        particle.position.y = stageHeight * Math.random()
+        particle.velocity = { 
+            x: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
+            y: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
+        }
+
+        particles.push(particle)
     }
+
+    return particles
+}
+
+function updateParticles(delta, particles, stageWidth, stageHeight) {
+    for (const particle of particles) {
+        const { position, velocity } = particle
+
+        position.x += velocity.x * delta
+        position.y += velocity.y * delta
+
+        // Bounce
+        if (position.x < 0 || position.x > stageWidth) {
+            velocity.x = -velocity.x
+        }
+
+        if (position.y < 0 || position.y > stageHeight) {
+            velocity.y = -velocity.y
+        }
+    }
+}
+
+function updateConnections(connections, particles, mousePos) {
+    connections.clear()
+    
+    for (const particle of particles) {
+        const distToMouse = distance(particle.position, mousePos)
+        
+        if (distToMouse < MaxParticleDistance) {
+            connections.lineStyle(1 - distToMouse / MaxParticleDistance, 0xffffff, 1 - distToMouse / MaxParticleDistance)
+            connections.moveTo(particle.position.x, particle.position.y)
+            connections.lineTo(mousePos.x, mousePos.y)
+        }
+    }
+
+    connections.endFill()
 }
 
 async function runAnimation() {
@@ -29,19 +89,13 @@ async function runAnimation() {
         height: stageHeight
     })
 
-    const particles = []
+    const particleTex = createParticleTexture(pixi, app)
+    const particles = createParticles(pixi, particleTex, ParticleCount, stageWidth, stageHeight)
+    const connections = new pixi.Graphics()
+    const ticker = pixi.Ticker.shared
 
-    for ( let i = 0; i < 100; i++ ) {
-        const particle = new pixi.Graphics()
-        particle.beginFill(0xffffff, 0.2 + Math.random() * 0.8)
-        particle.drawCircle(0, 0, 0.5 + Math.random() * 1.5)
-        particle.endFill()
-
-        setupParticle(particle, stageWidth, stageHeight)
-
-        app.stage.addChild(particle)
-        particles.push(particle)
-    }
+    app.stage.addChild(...particles)
+    app.stage.addChild(connections)
 
     let mousePos = { x: 0, y: 0 }
     app.stage.interactive = true
@@ -50,43 +104,11 @@ async function runAnimation() {
         mousePos.y = event.data.global.y
     })
 
-    const ticker = pixi.Ticker.shared
     ticker.add((time) => {
         const delta = time / 60
 
-        for(const p of particles) {
-            p.position.x += p.velocity.x * delta
-            p.position.y += p.velocity.y * delta
-
-            // Bounce
-            if (p.position.x < 0 || p.position.x > stageWidth) {
-                p.velocity.x = -p.velocity.x
-            }
-
-            if (p.position.y < 0 || p.position.y > stageHeight) {
-                p.velocity.y = -p.velocity.y
-            }
-
-            const distToMouse = distance(p.position, mousePos)
-            const maxDistance = 300
-            
-            if (distToMouse < maxDistance) {
-                if (!p.connection) {
-                    p.connection = new pixi.Graphics()
-                    app.stage.addChild(p.connection)
-                }
-
-                p.connection.clear()
-                p.connection.lineStyle(1 - distToMouse / maxDistance, 0xffffff, 1 - distToMouse / maxDistance)
-                p.connection.moveTo(p.position.x, p.position.y)
-                p.connection.lineTo(mousePos.x, mousePos.y)
-                p.connection.endFill()
-            }
-            else if (p.connection) {
-                app.stage.removeChild(p.connection)
-                p.connection = null
-            }
-        }
+        updateParticles(delta, particles, stageWidth, stageHeight)
+        updateConnections(connections, particles, mousePos)
     })
 
     ticker.start()
