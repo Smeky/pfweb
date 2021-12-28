@@ -1,7 +1,19 @@
 <template>
-    <Page>
+    <div id="app-root">
         <Background/>
-        
-        <h1>Index</h1>
-    </Page>
+        <Page>
+            <Section>
+
+            </Section>
+            <Section id="projects" title="Projects">
+                
+            </Section>
+            <Section>
+
+            </Section>
+            <Section>
+
+            </Section>
+        </Page>
+    </div>
 </template>
