@@ -5,7 +5,11 @@ const ParticlesPer1000PxSqrd = 0.2
 const DebugEnabled = false
 
 const Vec2 = {
-    distance: (a, b) => Math.hypot(b.x - a.x, b.y - a.y)
+    add: (a, b) => ({ x: a.x + b.x, y: a.y + b.y }),
+    subtract: (a, b) => ({ x: a.x - b.x, y: a.y - b.y }),
+    distance: (a, b) => Math.hypot(b.x - a.x, b.y - a.y),
+    dot: (a, b) => a.x * b.x + a.y * b.y,
+    angle: (a, b) => Math.atan2(b.y - a.y, b.x - a.x),
 }
 
 let timedFn = null
@@ -101,7 +105,7 @@ function updateConnections(particles) {
             .reduce((connections, other) => {
                 if (MaxConnectionDistance >= Vec2.distance(particle.position, other.position)) {
                     connections.push(other.index)
-                }1
+                }
 
                 return connections
             }, particle.connections)
