@@ -1,4 +1,5 @@
 
+const LineShowRadius = 300
 const MaxConnectionDistance = 120
 const MaxPointSpeed = 30
 const ParticlesPer1000PxSqrd = 0.2
@@ -24,7 +25,7 @@ function timeIt(fn, ...args) {
     }
 
     const start = performance.now() 
-    fn(...args)
+    const res = fn(...args)
     const end = performance.now()
     
     totalTime += end - start
@@ -34,6 +35,26 @@ function timeIt(fn, ...args) {
     if (callCount > 0 && callCount % 60 === 0) {
         console.log(`timeIt avg ${totalTime / callCount}`)
     }
+
+    return res
+}
+
+function createMaskTexture(pixi, app, blurFilter) {
+    const g = new pixi.Graphics()
+    g.beginFill(0xffffff)
+    g.drawCircle(0, 0, LineShowRadius * 0.7)
+    g.endFill()
+    g.filters = [blurFilter]
+    
+    const offset = 50
+    const region = { ...g.getLocalBounds() }
+
+    region.x -= offset
+    region.y -= offset
+    region.width += offset * 2
+    region.height += offset * 2
+
+    return app.renderer.generateTexture(g, { region })
 }
 
 function createParticleTexture(pixi, app) {
@@ -53,7 +74,6 @@ function createParticles(pixi, texture, count, stageWidth, stageHeight) {
         const particle = new pixi.Sprite(texture)
         
         particle.index = i
-        particle.connections = []
         particle.alpha = 0.2 + Math.random() * 0.8
         particle.anchor.set(0.5, 0.5)
         particle.scale.x = scale
@@ -89,48 +109,35 @@ function updateParticles(delta, particles, stageWidth, stageHeight) {
     }
 }
 
-function updateConnections(particles) {
-    particles.forEach((particle) => {
-        particle.connections = particles
-            // Start searching from this particle's index (all previous are already checked)
-            .slice(particle.index + 1)
-            // Faster way to filter out all connections that are too distant (rectangle, not a precise radius circle)
-            .filter((other) => {
-                return particle.position.x - other.position.x < MaxConnectionDistance &&
-                       particle.position.y - other.position.y < MaxConnectionDistance
-            })
-            .filter((other) => {
-                return !particle.connections.some((connectee) => connectee === other.index)
-            })
-            .reduce((connections, other) => {
-                if (MaxConnectionDistance >= Vec2.distance(particle.position, other.position)) {
-                    connections.push(other.index)
-                }
+function getConnections(particles) {
+    return particles.reduce((connections, particle, index) => {
+        for (const other of particles.slice(index + 1)) {
+            const distance = Vec2.distance(particle.position, other.position)
 
-                return connections
-            }, particle.connections)
-    })
+            if (!(particle.index in connections)) {
+                connections[particle.index] = []
+            }
+
+            connections[particle.index].push([other.index, distance])
+        }
+
+        return connections
+    }, {})
 }
 
-function redrawLines(lines, particles) {
+function redrawLines(lines, particles, connections) {
     lines.clear()
 
-    for (const particle of particles) {
-        particle.connections.forEach((connectee, index) => {
-            const otherPos = particles[connectee].position
-            const distance = Vec2.distance(particle.position, otherPos)
+    for (const [fromIndex, connectees] of Object.entries(connections)) {
+        for (const [toIndex, distance] of connectees) {
+            const fromPos = particles[fromIndex].position
+            const toPos = particles[toIndex].position
+            const ratio = 1 - distance / MaxConnectionDistance
 
-            if (distance > MaxConnectionDistance) {
-                particle.connections.splice(index, 1)
-            }
-            else {
-                const ratio = 1 - distance / MaxConnectionDistance
-
-                lines.lineStyle(0.3 + ratio * 0.7, 0xffffff, ratio)
-                lines.moveTo(particle.position.x, particle.position.y)
-                lines.lineTo(otherPos.x, otherPos.y)
-            }
-        })
+            lines.lineStyle(0.3 + ratio * 0.7, 0xffffff, ratio)
+            lines.moveTo(fromPos.x, fromPos.y)
+            lines.lineTo(toPos.x, toPos.y)
+        }
     }
 
     lines.endFill()
@@ -138,6 +145,8 @@ function redrawLines(lines, particles) {
 
 async function runAnimation() {
     const pixi = await import("pixi.js")
+    const { KawaseBlurFilter } = await import ("@pixi/filter-kawase-blur")
+
     pixi.utils.skipHello()
 
     const stageWidth = window.innerWidth
@@ -155,17 +164,38 @@ async function runAnimation() {
     const particles = createParticles(pixi, particleTex, particleCount, stageWidth, stageHeight)
     const lines = new pixi.Graphics()
     const ticker = new pixi.Ticker()
+    const mousePos = { x: 0, y: 0 }
 
+    lines.mask = new pixi.Sprite(createMaskTexture(pixi, app, new KawaseBlurFilter(20, 20)))
+    lines.mask.anchor.set(0.5, 0.5)
+
+    // app.stage.mask = mask
+    app.stage.addChild(lines.mask)
     app.stage.addChild(...particles)
     app.stage.addChild(lines)
 
+    app.stage.interactive = true
+    app.stage.on("mousemove", (event) => {
+        const { x, y } = event.data.global
+        mousePos.x = x
+        mousePos.y = y
+        lines.mask.position.copyFrom(mousePos)
+    })
+    
     ticker.add((time) => {
         const delta = time / 60
 
         updateParticles(delta, particles, stageWidth, stageHeight)
-        updateConnections(particles)
-        
-        redrawLines(lines, particles)
+
+        const connectables = particles.filter((particle) => {
+                                // First two lines should be a faster check (Todo: check if its true)
+                                return  Math.abs(particle.position.x - mousePos.x) < LineShowRadius &&
+                                        Math.abs(particle.position.y - mousePos.y) < LineShowRadius &&
+                                        Vec2.distance(particle.position, mousePos) < LineShowRadius
+                            })
+
+        const connections = getConnections(connectables)
+        redrawLines(lines, particles, connections)
     })
 
     if (DebugEnabled) {
@@ -179,6 +209,7 @@ async function runAnimation() {
             g.moveTo(p.position.x, p.position.y)
             g.lineTo(p.position.x + MaxConnectionDistance, p.position.y)
             g.drawCircle(p.position.x, p.position.y, MaxConnectionDistance)
+            g.drawCircle(mousePos.x, mousePos.y, LineShowRadius)
             g.endFill()
         })
     }
