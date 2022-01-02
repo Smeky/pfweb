@@ -5,6 +5,12 @@
     </div>
 </template>
 
+<style lang="scss">
+    .section h2 {
+        font-size: 30px;
+    }
+</style>
+
 <script>
     export default {
         props: ["title"]

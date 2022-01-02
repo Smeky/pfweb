@@ -39,6 +39,19 @@ function timeIt(fn, ...args) {
     return res
 }
 
+function getPageHeight() {
+    const html = document.documentElement
+    const body = document.body
+
+    return Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight,
+    )
+}
+
 function createMaskTexture(pixi, app, blurFilter) {
     const g = new pixi.Graphics()
     g.beginFill(0xffffff)
@@ -150,7 +163,7 @@ async function runAnimation() {
     pixi.utils.skipHello()
 
     const stageWidth = window.innerWidth
-    const stageHeight = Math.max(window.innerHeight, 600)
+    const stageHeight = getPageHeight()
     const app = new pixi.Application({
         antialias: true,
         backgroundAlpha: 0,
@@ -166,10 +179,10 @@ async function runAnimation() {
     const ticker = new pixi.Ticker()
     const mousePos = { x: 0, y: 0 }
 
+    lines.alpha = 0.6
     lines.mask = new pixi.Sprite(createMaskTexture(pixi, app, new KawaseBlurFilter(20, 20)))
     lines.mask.anchor.set(0.5, 0.5)
 
-    // app.stage.mask = mask
     app.stage.addChild(lines.mask)
     app.stage.addChild(...particles)
     app.stage.addChild(lines)
