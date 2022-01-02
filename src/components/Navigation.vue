@@ -1,6 +1,8 @@
 <template>
     <div class="navigation">
+        <a href="#root">Home</a>
         <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
     </div>
 </template>
 

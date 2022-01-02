@@ -2,10 +2,12 @@
     <div class="project">
         <h3 class="title">{{ title }}</h3>
         <div class="content" v-bind:class="{ '--flipped': flipped }">
+            <div class="image">
+                <div class="img-placeholder" />
+            </div>
             <p class="description">
                 <slot></slot>
             </p>
-            <div class="img-placeholder" />
         </div>
     </div>
 </template>
@@ -24,14 +26,16 @@
 
     .content {
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        justify-content: center;
 
         .img-placeholder {
             margin-left: 20px;
         }
 
         &.--flipped {
-            flex-direction: row-reverse;
+            flex-direction: row;
 
             .img-placeholder {
                 margin-left: 0;
@@ -44,6 +48,12 @@
         margin: 40px 20px 0 20px;
         text-align: center;
         font-size: 18px;
+        // min-width: 400px;
+        max-width: 50%;
+    }
+
+    .image {
+        
     }
 
     .img-placeholder {
