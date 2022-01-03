@@ -1,0 +1,11 @@
+@mixin res-phone {
+    @media (min-width: 360px) { @content };
+}
+
+@mixin res-tablet {
+    @media (min-width: 768px) { @content };
+}
+
+@mixin res-desktop {
+    @media (min-width: 1024px) { @content };
+}

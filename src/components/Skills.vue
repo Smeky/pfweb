@@ -19,15 +19,19 @@
 </template>
 
 <style lang="scss">
+    @import "~/mixins.scss";
+
     .skills {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         
-        .skill {
-            margin: 0 10px 12px 10px;
-            max-width: 480px;
+        @include res-tablet {
+            .skill {
+                flex: 50%;
+            }
         }
+        
         .skill:last-child {
             margin-bottom: 0;
         }

@@ -6,9 +6,15 @@
 </template>
 
 <style lang="scss">
+    @import "~/mixins.scss";
+
     .page {
-        padding-top: 160px;
-        padding-bottom: 200px;
-        max-width: min(80vw, 1000px);
+        margin-top: 160px;
+        margin-bottom: 200px;
+        padding: 0 30px;
+
+        @include res-desktop {
+            max-width: 1024px;
+        }
     }
 </style>

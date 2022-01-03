@@ -9,6 +9,8 @@
 </template>
 
 <style lang="scss">
+    @import "~/mixins.scss";
+
     $skill-bg-height: 4px;
     $skill-progress-height: 7px;
 
@@ -16,6 +18,13 @@
         width: 100%;
         display: flex;
         align-items: center;
+        margin-bottom: 5px;
+        padding: 0 5px;
+        box-sizing: border-box;
+
+        @include res-desktop {
+            padding: 0 15px;
+        }
     }
 
     .skill-bar {

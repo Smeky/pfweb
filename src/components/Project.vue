@@ -13,6 +13,8 @@
 </template>
 
 <style lang="scss" scoped>
+    @import "~/mixins.scss";
+
     .project {
         margin-bottom: 70px;
     }
@@ -30,39 +32,40 @@
         flex-wrap: wrap;
         justify-content: center;
 
-        .img-placeholder {
-            margin-left: 20px;
-        }
-
         &.--flipped {
             flex-direction: row;
+        }
 
-            .img-placeholder {
-                margin-left: 0;
-                margin-right: 20px;
-            }
+        @include res-desktop {
+            flex-wrap: nowrap;
         }
     }
 
     .description {
-        margin: 40px 20px 0 20px;
         text-align: center;
         font-size: 18px;
-        // min-width: 400px;
-        max-width: 50%;
-    }
+        padding: 40px 20px 0 20px;
 
-    .image {
-        
+        @include res-desktop {
+            margin: 0 40px;
+        }
     }
 
     .img-placeholder {
-        display: block;
-        min-width: 400px;
-        width: 400px;
-        height: 400px;
-        border-radius: 200px;
         background-color: rgba(100, 100, 100, 0.2);
+        width: 200px;
+        height: 200px;
+        border-radius: 200px;
+        
+        @include res-tablet {
+            width: 300px;
+            height: 300px;
+        }
+
+        @include res-desktop {
+            width: 400px;
+            height: 400px;
+        }
     }
 </style>
 
