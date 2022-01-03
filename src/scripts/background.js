@@ -3,6 +3,7 @@ const LineShowRadius = 300
 const MaxConnectionDistance = 120
 const MaxPointSpeed = 30
 const ParticlesPer1000PxSqrd = 0.2
+const FadeSpeed = 1
 
 const Vec2 = {
     add: (a, b) => ({ x: a.x + b.x, y: a.y + b.y }),
@@ -96,12 +97,16 @@ class Background {
         this.lines = this.app.stage.addChild(new this.pixi.Graphics())
         this.ticker = new this.pixi.Ticker()
         this.mousePos = { x: 0, y: 0 }
+        this.fadeSpeed = 0
+        this.isResetting = false
+        this.windowResizeTimeout = null
 
         this.setupParticles()
         this.setupMask()
 
         this.ticker.add(this.update)
 
+        this.app.stage.alpha = 0
         this.app.stage.interactive = true
         this.app.stage.on("mousemove", this.handleMouseMove)
         window.addEventListener("resize", this.handleWindowResize)
@@ -146,6 +151,7 @@ class Background {
 
     run() {
         this.ticker.start()
+        this.startFadeIn()
     }
 
     update = (time) => {
@@ -153,7 +159,14 @@ class Background {
 
         this.updateParticles(delta)
         this.updateConnections()
+        this.updateFade(delta)
+
         this.redrawLines()
+
+        if (this.isResetting && this.app.stage.alpha === 0) {
+            this.isResetting = false
+            this.reset()
+        }
     }
 
     updateParticles(delta) {
@@ -195,6 +208,23 @@ class Background {
     
             return connections
         }, {})
+    }
+
+    updateFade(delta) {
+        if (this.fadeSpeed !== 0) {
+            const { stage } = this.app
+
+            stage.alpha += this.fadeSpeed * delta
+
+            if (stage.alpha < 0) {
+                stage.alpha = 0
+                this.fadeSpeed = 0
+            }
+            else if (stage.alpha > 1) {
+                stage.alpha = 1
+                this.fadeSpeed = 0
+            }
+        }
     }
 
     updateParticleCount() {
@@ -251,6 +281,23 @@ class Background {
         this.lines.endFill()
     }
 
+    startFadeIn() {
+        this.fadeSpeed = FadeSpeed
+    }
+
+    startFadeOut() {
+        this.fadeSpeed = - FadeSpeed
+    }
+
+    reset() {
+        const { width, height } = getPageSize()
+        this.app.renderer.resize(width, height)
+
+        this.updateParticleCount()
+        this.resetAllParticles()
+        this.startFadeIn()
+    }
+
     handleMouseMove = (event) => {
         const { x, y } = event.data.global
         this.mousePos.x = x
@@ -260,12 +307,16 @@ class Background {
     }
 
     handleWindowResize = (event) => {
-        const { width, height } = getPageSize()
-        this.app.renderer.resize(width, height)
+        if (this.windowResizeTimeout) {
+            clearTimeout(this.windowResizeTimeout)
+        }
 
-        // Todo: Add some treshold time before update
-        this.updateParticleCount()
-        this.resetAllParticles()
+        this.startFadeOut()
+
+        this.windowResizeTimeout = setTimeout(() => {
+            this.isResetting = true
+            this.windowResizeTimeout = null
+        }, 700)
     }
 }
 
