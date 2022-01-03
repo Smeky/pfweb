@@ -117,27 +117,8 @@ class Background {
             this.particleTexture = this.app.renderer.generateTexture(graphics) 
         }
         
-        const count = calcParticleCount(this.stageWidth, this.stageHeight)
-
-        for (let i = 0; i < count; i++) {
-            const scale = 0.1 + Math.random() * 0.9
-            const particle = new this.pixi.Sprite(this.particleTexture)
-            
-            particle.index = i
-            particle.alpha = 0.2 + Math.random() * 0.8
-            particle.anchor.set(0.5, 0.5)
-            particle.scale.x = scale
-            particle.scale.y = scale
-            particle.position.x = this.stageWidth * Math.random()
-            particle.position.y = this.stageHeight * Math.random()
-            particle.velocity = { 
-                x: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
-                y: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
-            }
-    
-            this.particles.push(particle)
-            this.app.stage.addChild(particle)
-        }
+        this.updateParticleCount()
+        this.resetAllParticles()
     }
 
     setupMask() {
@@ -216,6 +197,42 @@ class Background {
         }, {})
     }
 
+    updateParticleCount() {
+        const currentCount = this.particles.length
+        const targetCount = calcParticleCount(this.stageWidth, this.stageHeight)
+
+        if (currentCount < targetCount) {
+            for (let i = currentCount; i < targetCount; i++) {
+                const scale = 0.1 + Math.random() * 0.9
+                const particle = new this.pixi.Sprite(this.particleTexture)
+                
+                particle.index = i
+                particle.alpha = 0.2 + Math.random() * 0.8
+                particle.anchor.set(0.5, 0.5)
+                particle.scale.x = scale
+                particle.scale.y = scale
+        
+                this.particles.push(particle)
+                this.app.stage.addChild(particle)
+            }
+        }
+        else if (currentCount > targetCount) {
+            const removed = this.particles.splice(currentCount - (currentCount - targetCount))
+            this.app.stage.removeChild(...removed)
+        }
+    }
+
+    resetAllParticles() {
+        for (const particle of this.particles) {
+            particle.position.x = this.stageWidth * Math.random()
+            particle.position.y = this.stageHeight * Math.random()
+            particle.velocity = { 
+                x: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
+                y: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
+            }
+        }
+    }
+
     redrawLines() {
         this.lines.clear()
 
@@ -242,7 +259,14 @@ class Background {
         this.lines.mask.position.copyFrom(this.mousePos)
     }
 
-    handleWindowResize = (event) => {}
+    handleWindowResize = (event) => {
+        const { width, height } = getPageSize()
+        this.app.renderer.resize(width, height)
+
+        // Todo: Add some treshold time before update
+        this.updateParticleCount()
+        this.resetAllParticles()
+    }
 }
 
 export default {
