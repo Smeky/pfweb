@@ -1,6 +1,5 @@
 <template>
     <div class="page">
-        <Navigation />
         <slot></slot>
     </div>
 </template>
