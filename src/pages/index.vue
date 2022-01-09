@@ -21,6 +21,9 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt mattis laoreet. Nulla massa ligula, cursus nec mauris sit amet, dignissim lobortis nibh. Integer sed volutpat augue. Suspendisse sodales sem tempus mauris sodales condimentum. Nam faucibus ante eu enim pellentesque, aliquet aliquet nulla commodo. Fusce eu leo semper, finibus ex sed, egestas tortor. Ut vestibulum elit ante, sit amet porttitor est auctor ut. Vivamus in felis ac sapien fermentum elementum.
                 </Project>
             </Section>
+
+            <Section id="about">
+            </Section>
         </Page>
         <Footer />
     </div>
