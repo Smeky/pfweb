@@ -3,7 +3,8 @@ const LineShowRadius = 300
 const MaxConnectionDistance = 150
 const MaxPointSpeed = 30
 const ParticlesPer1000PxSqrd = 0.1
-const FadeSpeed = 1
+const FadeInSpeed = 1
+const FadeOutSpeed = 2
 
 const Vec2 = {
     add: (a, b) => ({ x: a.x + b.x, y: a.y + b.y }),
@@ -60,17 +61,29 @@ function calcParticleCount(width, height) {
 }
 
 export default class Background {
+    States = {
+        Loading: "loading",
+        Stopped: "stopped",
+        Running: "running",
+        Stopping: "stopping",
+        Resetting: "resetting",
+    }
+
     get stageWidth() { return this.app.renderer.width }
     get stageHeight() { return this.app.renderer.height }
 
     constructor() {
-        this.isLoading = true
+        this.state = this.States.Loading
+        this.autoRun = false
     
         this.load()
             .then(() => {
-                this.isLoading = false
+                this.state = this.States.Stopped
                 this.setup()
-                this.run()
+
+                if (this.autoRun) {
+                    this.run()
+                }
             })
     }
 
@@ -92,13 +105,12 @@ export default class Background {
             width,
             height,
         })
-
+        
         this.particles = []
         this.lines = this.app.stage.addChild(new this.pixi.Graphics())
         this.ticker = new this.pixi.Ticker()
         this.mousePos = { x: 0, y: 0 }
         this.fadeSpeed = 0
-        this.isResetting = false
         this.windowResizeTimeout = null
 
         this.setupParticles()
@@ -149,12 +161,11 @@ export default class Background {
         this.app.stage.addChild(this.lines.mask)
     }
 
-    run() {
-        this.ticker.start()
-        this.startFadeIn()
-    }
-
     update = (time) => {
+        if (this.state === this.States.Stopped) {
+            return
+        }
+
         const delta = time / 60
 
         this.updateParticles(delta)
@@ -162,11 +173,6 @@ export default class Background {
         this.updateFade(delta)
 
         this.redrawLines()
-
-        if (this.isResetting && this.app.stage.alpha === 0) {
-            this.isResetting = false
-            this.reset()
-        }
     }
 
     updateParticles(delta) {
@@ -219,10 +225,14 @@ export default class Background {
             if (stage.alpha < 0) {
                 stage.alpha = 0
                 this.fadeSpeed = 0
+                
+                this.onFadeOut()
             }
             else if (stage.alpha > 1) {
                 stage.alpha = 1
                 this.fadeSpeed = 0
+
+                this.onFadeIn()
             }
         }
     }
@@ -282,11 +292,30 @@ export default class Background {
     }
 
     startFadeIn() {
-        this.fadeSpeed = FadeSpeed
+        this.fadeSpeed = FadeInSpeed
     }
 
     startFadeOut() {
-        this.fadeSpeed = - FadeSpeed
+        this.fadeSpeed = - FadeOutSpeed
+    }
+
+    run() {
+        if (this.state === this.States.Loading) {
+            this.autoRun = true
+            return
+        }
+
+        this.state = this.States.Running
+        this.startFadeIn()
+        
+        if (!this.ticker.started) {
+            this.ticker.start()
+        }
+    }
+    
+    stop() {
+        this.state = this.States.Stopping
+        this.startFadeOut()
     }
 
     reset() {
@@ -295,7 +324,6 @@ export default class Background {
 
         this.updateParticleCount()
         this.resetAllParticles()
-        this.startFadeIn()
     }
 
     handleMouseMove = (event) => {
@@ -314,16 +342,22 @@ export default class Background {
         this.startFadeOut()
 
         this.windowResizeTimeout = setTimeout(() => {
-            this.isResetting = true
+            this.state = this.States.Resetting
             this.windowResizeTimeout = null
         }, 700)
     }
 
-    run() {
-        console.log("run bg")
+    onFadeIn() {
+
     }
-    
-    stop() {
-        console.log("stop bg")
+
+    onFadeOut() {
+        if (this.state === this.States.Resetting) {
+            this.reset()
+            this.run()
+        }
+        else if (this.state === this.States.Stopping) {
+            this.state = this.States.Stopped
+        }
     }
 }

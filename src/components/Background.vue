@@ -28,6 +28,7 @@
 
         mounted() {
             this.background = new Background()
+            this.background.run()
 
             // Expose background to devtools
             if (process.env.NODE_ENV === "development") {
