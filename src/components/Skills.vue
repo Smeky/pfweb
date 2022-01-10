@@ -8,7 +8,7 @@
             <SkillIcon :label="'JS'" />
         </Skill>
         
-        <Skill v-bind:progress="70">
+        <Skill v-bind:progress="80" description="Including the usual tech stack - Redux, Express, ...">
             <SkillIcon :label="'React'" />
         </Skill>
         
@@ -22,6 +22,10 @@
         
         <Skill v-bind:progress="30" description="It's been years since the last time...">
             <SkillIcon :label="'C++'" />
+        </Skill>
+        
+        <Skill v-bind:progress="60" description="Setting up NPM projects - webpack, babel and many others">
+            <SkillIcon :label="'NPM'" />
         </Skill>
     </div>
 </template>
