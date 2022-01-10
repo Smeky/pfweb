@@ -31,19 +31,19 @@
         transform: translateX(50%);
         z-index: 1;
 
+        &.--fixed {
+            position: fixed;
+            top: 0;
+            right: 40px;
+            transform: translate(0%);
+        }
+
         > a {
             padding: 4px 12px;
             font-size: 20px;
             height: 30px;
             position: relative;
             transition: all 0.5s ease;
-        }
-
-        &.--fixed {
-            position: fixed;
-            top: 0;
-            right: 40px;
-            transform: translate(0%);
         }
     }
 </style>

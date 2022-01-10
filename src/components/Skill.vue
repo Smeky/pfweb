@@ -18,7 +18,7 @@
         width: 100%;
         display: flex;
         align-items: center;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         padding: 0 5px;
         box-sizing: border-box;
 
