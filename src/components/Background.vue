@@ -12,4 +12,27 @@
     }
 </style>
 
-<script src="../scripts/background.js"></script>
+<script>
+    import Background from "~/scripts/background"    
+
+    export default {
+        props: {
+            isRunning: Boolean,
+        },
+
+        watch: {
+            isRunning(value) {
+                value ? this.background.run() : this.background.stop()
+            }
+        },
+
+        mounted() {
+            this.background = new Background()
+
+            // Expose background to devtools
+            if (process.env.NODE_ENV === "development") {
+                window._background = this.background
+            }
+        }
+    }
+</script>

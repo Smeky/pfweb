@@ -59,7 +59,7 @@ function calcParticleCount(width, height) {
     return Math.floor((width * height) / 1000 * ParticlesPer1000PxSqrd)
 }
 
-class Background {
+export default class Background {
     get stageWidth() { return this.app.renderer.width }
     get stageHeight() { return this.app.renderer.height }
 
@@ -318,15 +318,12 @@ class Background {
             this.windowResizeTimeout = null
         }, 700)
     }
-}
 
-export default {
-    mounted() {
-        const background = new Background()
-
-        // Expose background to devtool's terminal
-        if (process.env.NODE_ENV === "development") {
-            window._background = background
-        }
+    run() {
+        console.log("run bg")
+    }
+    
+    stop() {
+        console.log("stop bg")
     }
 }

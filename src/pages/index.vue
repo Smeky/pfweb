@@ -1,6 +1,6 @@
 <template>
     <div id="root">
-        <Background v-if="isBackgroundActive" />
+        <Background :isRunning="isBackgroundActive" />
         <Page>
             <div class="introduction">
                 <p id="introduction"></p>
