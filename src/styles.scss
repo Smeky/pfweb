@@ -1,12 +1,12 @@
 html {
     scroll-behavior: smooth;
-    overflow-y: overlay;
 }
 
 body {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     background-color: #0d1221;
     color: #ffffff;
+    overflow-y: overlay;
 }
 
 body, p {
@@ -17,4 +17,8 @@ body, p {
 a, a:visited, a:active {
     text-decoration: none;
     color: inherit;
+}
+
+iframe {
+    border: 1px solid rgba(255,255,255,0.1);
 }

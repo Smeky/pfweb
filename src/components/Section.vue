@@ -8,10 +8,6 @@
 <style lang="scss">
     .section {
         margin: 150px 0;
-
-        &:first-of-type {
-            margin: 0;
-        }
     }
 
     .section h2 {

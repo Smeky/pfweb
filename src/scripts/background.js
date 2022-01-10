@@ -1,8 +1,8 @@
 
 const LineShowRadius = 300
-const MaxConnectionDistance = 120
+const MaxConnectionDistance = 150
 const MaxPointSpeed = 30
-const ParticlesPer1000PxSqrd = 0.2
+const ParticlesPer1000PxSqrd = 0.1
 const FadeSpeed = 1
 
 const Vec2 = {

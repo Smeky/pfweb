@@ -3,11 +3,10 @@
         <h3 class="title">{{ title }}</h3>
         <div class="content" v-bind:class="{ '--flipped': flipped }">
             <div class="image">
-                <div class="img-placeholder" />
+                <div class="img-placeholder"></div>
             </div>
-            <p class="description">
-                <slot></slot>
-            </p>
+            
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -39,15 +38,15 @@
         @include res-desktop {
             flex-wrap: nowrap;
         }
-    }
 
-    .description {
-        text-align: center;
-        font-size: 18px;
-        padding: 40px 20px 0 20px;
-
-        @include res-desktop {
-            margin: 0 40px;
+        > p {
+            text-align: center;
+            font-size: 18px;
+            padding: 40px 20px 0 20px;
+    
+            @include res-desktop {
+                margin: 0 40px;
+            }
         }
     }
 

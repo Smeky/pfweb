@@ -1,19 +1,27 @@
 <template>
     <div class="skills">
         <Skill v-bind:progress="90" description="HTML, CSS, ...">
-            <SkillIcon>Testy test</SkillIcon>
+            <SkillIcon :label="'Web'" />
         </Skill>
         
-        <Skill v-bind:progress="50">
-            <SkillIcon>Testy test</SkillIcon>
+        <Skill v-bind:progress="95" description="General language knowledge, ES6, ...">
+            <SkillIcon :label="'JS'" />
         </Skill>
         
-        <Skill v-bind:progress="20">
-            <SkillIcon>Test</SkillIcon>
+        <Skill v-bind:progress="70">
+            <SkillIcon :label="'React'" />
         </Skill>
         
-        <Skill v-bind:progress="50">
-            <SkillIcon>Test #2</SkillIcon>
+        <Skill v-bind:progress="35">
+            <SkillIcon :label="'Vue'" />
+        </Skill>
+
+        <Skill v-bind:progress="90">
+            <SkillIcon :label="'Python'" />
+        </Skill>
+        
+        <Skill v-bind:progress="30" description="It's been years since the last time...">
+            <SkillIcon :label="'C++'" />
         </Skill>
     </div>
 </template>
@@ -29,6 +37,7 @@
         @include res-tablet {
             .skill {
                 flex: 50%;
+                max-width: 50%;
             }
         }
         
