@@ -2,10 +2,7 @@
     <div id="root">
         <Background :isRunning="isBackgroundActive" />
         <Page>
-            <div class="introduction">
-                <p id="introduction"></p>
-            </div>
-
+            <Introduction />
             <Navigation />
 
             <div>
@@ -53,35 +50,15 @@
         flex-direction: column;
         align-items: center;
     }
-    
-    .introduction {
-        text-align: center;
-        font-size: 24px;
-        height: 300px;
-
-        p {
-            display: inline-block;
-        }
-    }
 </style>
 
 <script>
-    import Typed from "typed.js"
-
     export default {
         data() {
             return {
                 isBackgroundActive: true,
                 isTmtdModalShown: false
             }
-        },
-
-        mounted() {
-            new Typed("#introduction", {
-                strings: ["I'm Tom^1200, bla bla bla^1200, bla bla"],
-                typeSpeed: 30,
-                loop: true,
-            })
         },
 
         methods: {
