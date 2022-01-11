@@ -1,11 +1,19 @@
 <template>
     <div class="skills">
         <Skill v-bind:progress="90" description="HTML, CSS, ...">
-            <SkillIcon :label="'Web'" />
+            <SkillIcon :label="'Frontend'" />
+        </Skill>
+
+        <Skill v-bind:progress="60" description="">
+            <SkillIcon :label="'Backend'" />
         </Skill>
         
         <Skill v-bind:progress="95" description="General language knowledge, ES6, ...">
             <SkillIcon :label="'JS'" />
+        </Skill>
+        
+        <Skill v-bind:progress="100" description="Trust me, I am fast - VSCode is work of art">
+            <SkillIcon :label="'Code editting'" />
         </Skill>
         
         <Skill v-bind:progress="80" description="Including the usual tech stack - Redux, Express, ...">
@@ -16,7 +24,7 @@
             <SkillIcon :label="'Vue'" />
         </Skill>
 
-        <Skill v-bind:progress="90">
+        <Skill v-bind:progress="80">
             <SkillIcon :label="'Python'" />
         </Skill>
         

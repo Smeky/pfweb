@@ -13,16 +13,16 @@
         padding: 6px;
         
         background-color: rgba(28, 49, 95, 0.6);
-        width: 54px;
-        min-width: 54px;
-        height: 54px;
-        border-radius: 36px;
+        width: 64px;
+        min-width: 64px;
+        height: 64px;
+        border-radius: 64px;
 
         p {
             color: rgba(255, 255, 255, 0.4);
             font-weight: 600;
             text-align: center;
-            letter-spacing: 1px;
+            line-height: 17px;
             
             &::first-letter {
                 font-size: 22px;
