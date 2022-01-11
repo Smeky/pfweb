@@ -1,14 +1,14 @@
 <template>
     <div id="navbar">
         <div class="navigation" v-bind:class="{ '--fixed': isFixed }">
-            <a v-for="navItem in navList" 
-                :id="navItem.id"
-                :key="navItem.id" 
-                :href="navItem.href"
-                :style="isFixed ? navItem.styles.fixed : navItem.styles.default"
+            <Button v-for="navItem in navList"
+                    :id="navItem.id"
+                    :key="navItem.id"
+                    :style="isFixed ? navItem.styles.fixed : navItem.styles.default"
+                    @click.native="() => handleNavClick(navItem.href)"
             >
                 {{ navItem.label }}
-            </a>
+            </Button>
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
 
     #navbar {
         height: $navbar-height;
-        margin-bottom: 40px;
+        margin-bottom: 100px;
     }
 
     .navigation {
@@ -31,19 +31,21 @@
         transform: translateX(50%);
         z-index: 1;
 
+        > .button {
+            height: 30px;
+            margin: 0 10px;
+            transition: all 0.5s ease;
+        }
+
         &.--fixed {
             position: fixed;
             top: 0;
             right: 40px;
             transform: translate(0%);
-        }
 
-        > a {
-            padding: 4px 12px;
-            font-size: 20px;
-            height: 30px;
-            position: relative;
-            transition: all 0.5s ease;
+            > .button {
+                margin: 0;
+            }
         }
     }
 </style>
@@ -81,6 +83,17 @@
                 const { top } = navbar.getBoundingClientRect()
 
                 this.isFixed = top < 0
+            },
+
+            handleNavClick(href) {
+                const anchor = document.getElementById(href.replace("#", ""))
+                
+                if (!anchor) {
+                    console.error(`Invalid href "${href}"`)
+                    return
+                }
+
+                window.scrollTo(0, anchor.offsetTop - window.innerHeight * 0.15)
             },
 
             getItemFixedStyle(itemId, index) {

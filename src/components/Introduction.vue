@@ -42,14 +42,12 @@
     export default {
         mounted() {
             document.getElementById("headline").addEventListener("animationend", () => {
-                console.log("haf")
-
-                new Typed("#introduce", {
-                    strings: ["Welcome..."],
-                    typeSpeed: 60,
-                    startDelay: 1000,
-                    loop: false,
-                })
+                // new Typed("#introduce", {
+                //     strings: ["Welcome..."],
+                //     typeSpeed: 60,
+                //     startDelay: 1000,
+                //     loop: false,
+                // })
             }, { once: true })
         }
     }
