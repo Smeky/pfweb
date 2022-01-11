@@ -338,11 +338,15 @@ export default class Background {
         if (this.windowResizeTimeout) {
             clearTimeout(this.windowResizeTimeout)
         }
-
-        this.startFadeOut()
+        else {
+            this.startFadeOut()
+            this.state = this.States.Resetting
+        }
 
         this.windowResizeTimeout = setTimeout(() => {
-            this.state = this.States.Resetting
+            this.reset()
+            this.run()
+
             this.windowResizeTimeout = null
         }, 700)
     }
@@ -352,11 +356,7 @@ export default class Background {
     }
 
     onFadeOut() {
-        if (this.state === this.States.Resetting) {
-            this.reset()
-            this.run()
-        }
-        else if (this.state === this.States.Stopping) {
+        if (this.state === this.States.Stopping) {
             this.state = this.States.Stopped
         }
     }
