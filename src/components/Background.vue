@@ -34,6 +34,9 @@
             if (process.env.NODE_ENV === "development") {
                 window._background = this.background
             }
+
+            window.addEventListener("blur", () => this.background.stop())
+            window.addEventListener("focus", () => this.background.run())
         }
     }
 </script>

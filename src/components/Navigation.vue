@@ -79,10 +79,7 @@
 
         methods: {
             handleScroll() {
-                const navbar = document.getElementById("navbar")
-                const { top } = navbar.getBoundingClientRect()
-
-                this.isFixed = top < 0
+                this.isFixed = document.getElementById("navbar").offsetTop < window.scrollY
             },
 
             handleNavClick(href) {

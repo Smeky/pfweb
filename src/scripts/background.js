@@ -1,5 +1,5 @@
 
-const LineShowRadius = 300
+const LineShowRadius = 250
 const MaxConnectionDistance = 150
 const MaxPointSpeed = 30
 const ParticlesPer1000PxSqrd = 0.1
@@ -176,9 +176,7 @@ export default class Background {
     }
 
     updateParticles(delta) {
-        for (const particle of this.particles) {
-            const { position, velocity } = particle
-    
+        for (const { position, velocity } of this.particles) {
             position.x += velocity.x * delta
             position.y += velocity.y * delta
     
