@@ -36,7 +36,7 @@
             </div>
         </Page>
 
-        <Modal v-if="isTmtdModalShown" :onClose="tmtdModalClosed">
+        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
             <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
         </Modal>
 
