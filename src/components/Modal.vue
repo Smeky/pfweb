@@ -1,9 +1,16 @@
 <template>
-    <transition name="modal">
+    <transition name="modal"
+        @after-enter="contentVisible = true"
+        @before-leave="contentVisible = false">
+        
         <div class="modal" v-on:click="onClose" v-if="open">
-            <div class="modal-content">
-                <slot></slot>
-            </div>
+
+            <transition name="modal-content">
+                <div class="modal-content" v-if="contentVisible">
+                    <slot></slot>
+                </div>
+            </transition>
+
         </div>
     </transition>
 </template>
@@ -25,6 +32,11 @@
 
         &-leave-active {
             animation: unwrap 0.5s ease reverse;
+
+            > .modal-content {
+                transition: opacity 0.2s;
+                opacity: 0;
+            }
         }
         &-enter-active {
             animation: unwrap 0.5s ease;
@@ -47,29 +59,34 @@
         }
     }
 
-    // .modal-content {
-    //     &-enter-active {
-    //         animation: fadein 0.5s;
-    //     }
-        
-    //     &-leave-active {
-    //         animation: fadein 0s reverse;
-    //     }
+    .modal-content {
+        &-enter-active {
+            animation: fadein 0.5s;
+        }
+        &-leave-active {
+            animation: fadein 0.2s reverse;
+        }
 
-    //     @keyframes fadein {
-    //         from {
-    //             opacity: 0;
-    //         }
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
 
-    //         to {
-    //             opacity: 1;
-    //         }
-    //     }
-    // }
+            to {
+                opacity: 1;
+            }
+        }
+    }
 </style>
 
 <script>
     export default {
+        data() {
+            return {
+                contentVisible: false
+            }
+        },
+
         props: {
             open: {
                 default: false,
