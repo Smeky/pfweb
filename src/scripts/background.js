@@ -14,32 +14,6 @@ const Vec2 = {
     angle: (a, b) => Math.atan2(b.y - a.y, b.x - a.x),
 }
 
-let timedFn = null
-let totalTime = 0
-let callCount = 0
-
-function timeIt(fn, ...args) {
-    if (timedFn !== fn) {
-        timedFn = fn
-        callCount = 0
-        totalTime = 0
-    }
-
-    const start = performance.now() 
-    const res = fn(...args)
-    const end = performance.now()
-    
-    totalTime += end - start
-    callCount++
-
-    // Estimate 60 calls per second
-    if (callCount > 0 && callCount % 60 === 0) {
-        console.log(`timeIt avg ${totalTime / callCount}`)
-    }
-
-    return res
-}
-
 function getPageSize() {
     const html = document.documentElement
     const body = document.body
@@ -69,9 +43,6 @@ export default class Background {
         Resetting: "resetting",
     }
 
-    get stageWidth() { return this.app.renderer.width }
-    get stageHeight() { return this.app.renderer.height }
-
     constructor() {
         this.state = this.States.Loading
         this.autoRun = false
@@ -96,15 +67,17 @@ export default class Background {
     }
 
     setup() {
-        const { width, height } = getPageSize()
-
         this.app = new this.pixi.Application({
             antialias: true,
             backgroundAlpha: 0,
             view: document.getElementById("background"),
-            width,
-            height,
+            width: window.innerWidth,
+            height: window.innerHeight,
         })
+
+        const { width, height } = getPageSize()
+        this.stageWidth = width
+        this.stageHeight = height
         
         this.particles = []
         this.lines = this.app.stage.addChild(new this.pixi.Graphics())
@@ -161,6 +134,10 @@ export default class Background {
         this.app.stage.addChild(this.lines.mask)
     }
 
+    setScroll(value) {
+        this.app.stage.position.y = -value
+    }
+
     update = (time) => {
         if (this.state === this.States.Stopped) {
             return
@@ -176,7 +153,7 @@ export default class Background {
     }
 
     updateParticles(delta) {
-        for (const { position, velocity } of this.particles) {
+        this.particles.forEach(({ position, velocity }) => {
             position.x += velocity.x * delta
             position.y += velocity.y * delta
     
@@ -188,7 +165,7 @@ export default class Background {
             if (position.y < 0 || position.y > this.stageHeight) {
                 velocity.y = -velocity.y
             }
-        }
+        })
     }
 
     updateConnections() {
@@ -260,6 +237,13 @@ export default class Background {
         }
     }
 
+    updateStageSize() {
+        this.app.renderer.resize(window.innerWidth, window.innerHeight)
+        const { width, height } = getPageSize()
+        this.stageWidth = width
+        this.stageHeight = height
+    }
+
     resetAllParticles() {
         for (const particle of this.particles) {
             particle.position.x = this.stageWidth * Math.random()
@@ -317,9 +301,6 @@ export default class Background {
     }
 
     reset() {
-        const { width, height } = getPageSize()
-        this.app.renderer.resize(width, height)
-
         this.updateParticleCount()
         this.resetAllParticles()
     }
@@ -342,6 +323,7 @@ export default class Background {
         }
 
         this.windowResizeTimeout = setTimeout(() => {
+            this.updateStageSize()
             this.reset()
             this.run()
 

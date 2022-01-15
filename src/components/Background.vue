@@ -4,7 +4,7 @@
 
 <style lang="scss">
     #background {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: -1;
@@ -35,6 +35,7 @@
                 window._background = this.background
             }
 
+            window.addEventListener("scroll", () => this.background.setScroll(window.scrollY))
             window.addEventListener("blur", () => this.background.stop())
             window.addEventListener("focus", () => this.background.run())
         }
