@@ -7,11 +7,17 @@ const FadeInSpeed = 1
 const FadeOutSpeed = 2
 
 const Vec2 = {
-    add: (a, b) => ({ x: a.x + b.x, y: a.y + b.y }),
-    subtract: (a, b) => ({ x: a.x - b.x, y: a.y - b.y }),
-    distance: (a, b) => Math.hypot(b.x - a.x, b.y - a.y),
-    dot: (a, b) => a.x * b.x + a.y * b.y,
-    angle: (a, b) => Math.atan2(b.y - a.y, b.x - a.x),
+    distance: (a, b) => Math.hypot(b.x - a.x, b.y - a.y)
+}
+
+let pixi = null
+let KawaseBlurFilter = null
+
+async function loadPixi() {
+    pixi = await import("pixi.js")
+    pixi.utils.skipHello()
+
+    KawaseBlurFilter = (await import("pixi-filters")).KawaseBlurFilter
 }
 
 function getPageSize() {
@@ -34,6 +40,89 @@ function calcParticleCount(width, height) {
     return Math.floor((width * height) / 1000 * ParticlesPer1000PxSqrd)
 }
 
+function createParticles(count, texture) {
+    const particles = []
+
+    for (let i = 0; i < count; i++) {
+        const particle = new pixi.Sprite(texture)
+        const scale = 0.1 + Math.random() * 0.9
+        
+        particle.index = i
+        particle.alpha = 0.2 + Math.random() * 0.8
+        particle.anchor.set(0.5, 0.5)
+        particle.scale.x = scale
+        particle.scale.y = scale
+        particle.velocity = { x: 0, y: 0 }
+
+        particles.push(particle)
+    }
+
+    return particles
+}
+
+function resetParticles(particles, stageWidth, stageHeight) {
+    particles.forEach(({ position, velocity }) => {
+        position.x = stageWidth  * Math.random()
+        position.y = stageHeight * Math.random()
+        velocity.x = MaxPointSpeed - Math.random() * (MaxPointSpeed * 2)
+        velocity.y = MaxPointSpeed - Math.random() * (MaxPointSpeed * 2)
+    })
+}
+
+function translateParticles(particles, delta, stageWidth, stageHeight) {
+    particles.forEach(({ position, velocity }) => {
+        position.x += velocity.x * delta
+        position.y += velocity.y * delta
+
+        // Bounce
+        if (position.x < 0 || position.x > stageWidth) {
+            velocity.x = -velocity.x
+        }
+
+        if (position.y < 0 || position.y > stageHeight) {
+            velocity.y = -velocity.y
+        }
+    })
+}
+
+function getConnections(particles, mouseX, mouseY) {
+    const connectables = particles.filter((particle) => {
+        // First two lines should be a faster check (Todo: check if its true)
+        return  Math.abs(particle.position.x - mouseX) < LineShowRadius &&
+                Math.abs(particle.position.y - mouseY) < LineShowRadius &&
+                Vec2.distance(particle.position, { x: mouseX, y: mouseY }) < LineShowRadius
+    })
+
+    return connectables.reduce((connections, particle, index) => {
+        for (const other of connectables.slice(index + 1)) {
+            const distance = Vec2.distance(particle.position, other.position)
+
+            if (distance < MaxConnectionDistance && !connections.some(([from, to]) => to === particle.index && from === other.index)) {
+                connections.push([particle.index, other.index])
+            }
+        }
+
+        return connections
+    }, [])
+}
+
+function updateLines(lines, particles, connections) {
+    lines.clear()
+
+    connections.forEach(([from, to]) => {
+        const fromPos  = particles[from].position
+        const toPos    = particles[to].position
+        const distance = Vec2.distance(fromPos, toPos)
+        const ratio    = 1 - distance / MaxConnectionDistance
+
+        lines.lineStyle(0.3 + ratio * 0.7, 0xffffff, ratio)
+        lines.moveTo(fromPos.x, fromPos.y)
+        lines.lineTo(toPos.x, toPos.y)
+    })
+
+    lines.endFill()
+}
+
 export default class Background {
     States = {
         Loading: "loading",
@@ -47,7 +136,7 @@ export default class Background {
         this.state = this.States.Loading
         this.autoRun = false
     
-        this.load()
+        loadPixi()
             .then(() => {
                 this.state = this.States.Stopped
                 this.setup()
@@ -58,17 +147,8 @@ export default class Background {
             })
     }
 
-    async load() {
-        this.pixi = await import("pixi.js")
-        this.pixi.utils.skipHello()
-
-        const { KawaseBlurFilter } = await import ("@pixi/filter-kawase-blur")
-        this.blurFilter = new KawaseBlurFilter(20, 20)
-    }
-
     setup() {
-        this.app = new this.pixi.Application({
-            antialias: true,
+        this.app = new pixi.Application({
             backgroundAlpha: 0,
             view: document.getElementById("background"),
             width: window.innerWidth,
@@ -80,8 +160,9 @@ export default class Background {
         this.stageHeight = height
         
         this.particles = []
-        this.lines = this.app.stage.addChild(new this.pixi.Graphics())
-        this.ticker = new this.pixi.Ticker()
+        this.lines = this.app.stage.addChild(new pixi.Graphics())
+
+        this.ticker = new pixi.Ticker()
         this.mousePos = { x: 0, y: 0 }
         this.fadeSpeed = 0
         this.windowResizeTimeout = null
@@ -99,7 +180,7 @@ export default class Background {
 
     setupParticles() {
         {   // Create particle texture
-            const graphics = new this.pixi.Graphics()
+            const graphics = new pixi.Graphics()
             graphics.beginFill(0xffffff)
             graphics.drawCircle(0, 0, 2)
             graphics.endFill()
@@ -107,16 +188,15 @@ export default class Background {
             this.particleTexture = this.app.renderer.generateTexture(graphics) 
         }
         
-        this.updateParticleCount()
-        this.resetAllParticles()
+        this.reset()
     }
 
     setupMask() {
-        const g = new this.pixi.Graphics()
+        const g = new pixi.Graphics()
         g.beginFill(0xffffff)
         g.drawCircle(0, 0, LineShowRadius * 0.7)
         g.endFill()
-        g.filters = [this.blurFilter]
+        g.filters = [new KawaseBlurFilter(20, 20)]
         
         const offset = 50
         const region = { ...g.getLocalBounds() }
@@ -129,13 +209,9 @@ export default class Background {
         const texture = this.app.renderer.generateTexture(g, { region })
 
         this.lines.alpha = 0.6
-        this.lines.mask = new this.pixi.Sprite(texture)
+        this.lines.mask = new pixi.Sprite(texture)
         this.lines.mask.anchor.set(0.5, 0.5)
         this.app.stage.addChild(this.lines.mask)
-    }
-
-    setScroll(value) {
-        this.app.stage.position.y = -value
     }
 
     update = (time) => {
@@ -145,70 +221,32 @@ export default class Background {
 
         const delta = time / 60
 
-        this.updateParticles(delta)
-        this.updateConnections()
-        this.updateFade(delta)
+        translateParticles(this.particles, delta, this.stageWidth, this.stageHeight)
+        
+        const connections = getConnections(this.particles, this.mousePos.x, this.mousePos.y)
+        updateLines(this.lines, this.particles, connections)
 
-        this.redrawLines()
-    }
-
-    updateParticles(delta) {
-        this.particles.forEach(({ position, velocity }) => {
-            position.x += velocity.x * delta
-            position.y += velocity.y * delta
-    
-            // Bounce
-            if (position.x < 0 || position.x > this.stageWidth) {
-                velocity.x = -velocity.x
-            }
-    
-            if (position.y < 0 || position.y > this.stageHeight) {
-                velocity.y = -velocity.y
-            }
-        })
-    }
-
-    updateConnections() {
-        const connectables = this.particles.filter((particle) => {
-            // First two lines should be a faster check (Todo: check if its true)
-            return  Math.abs(particle.position.x - this.mousePos.x) < LineShowRadius &&
-                    Math.abs(particle.position.y - this.mousePos.y) < LineShowRadius &&
-                    Vec2.distance(particle.position, this.mousePos) < LineShowRadius
-        })
-
-        this.connections = connectables.reduce((connections, particle, index) => {
-            for (const other of connectables.slice(index + 1)) {
-                const distance = Vec2.distance(particle.position, other.position)
-    
-                if (!(particle.index in connections)) {
-                    connections[particle.index] = []
-                }
-    
-                connections[particle.index].push([other.index, distance])
-            }
-    
-            return connections
-        }, {})
+        if (this.fadeSpeed !== 0) {
+            this.updateFade(delta)
+        }
     }
 
     updateFade(delta) {
-        if (this.fadeSpeed !== 0) {
-            const { stage } = this.app
+        const { stage } = this.app
 
-            stage.alpha += this.fadeSpeed * delta
+        stage.alpha += this.fadeSpeed * delta
 
-            if (stage.alpha < 0) {
-                stage.alpha = 0
-                this.fadeSpeed = 0
-                
-                this.onFadeOut()
-            }
-            else if (stage.alpha > 1) {
-                stage.alpha = 1
-                this.fadeSpeed = 0
+        if (stage.alpha < 0) {
+            stage.alpha = 0
+            this.fadeSpeed = 0
+            
+            this.onFadeOut()
+        }
+        else if (stage.alpha > 1) {
+            stage.alpha = 1
+            this.fadeSpeed = 0
 
-                this.onFadeIn()
-            }
+            this.onFadeIn()
         }
     }
 
@@ -217,19 +255,10 @@ export default class Background {
         const targetCount = calcParticleCount(this.stageWidth, this.stageHeight)
 
         if (currentCount < targetCount) {
-            for (let i = currentCount; i < targetCount; i++) {
-                const scale = 0.1 + Math.random() * 0.9
-                const particle = new this.pixi.Sprite(this.particleTexture)
-                
-                particle.index = i
-                particle.alpha = 0.2 + Math.random() * 0.8
-                particle.anchor.set(0.5, 0.5)
-                particle.scale.x = scale
-                particle.scale.y = scale
-        
-                this.particles.push(particle)
-                this.app.stage.addChild(particle)
-            }
+            const newParticles = createParticles(targetCount - currentCount, this.particleTexture)
+
+            this.particles = this.particles.concat(newParticles)
+            this.app.stage.addChild(...newParticles)
         }
         else if (currentCount > targetCount) {
             const removed = this.particles.splice(currentCount - (currentCount - targetCount))
@@ -238,39 +267,11 @@ export default class Background {
     }
 
     updateStageSize() {
-        this.app.renderer.resize(window.innerWidth, window.innerHeight)
         const { width, height } = getPageSize()
         this.stageWidth = width
         this.stageHeight = height
-    }
-
-    resetAllParticles() {
-        for (const particle of this.particles) {
-            particle.position.x = this.stageWidth * Math.random()
-            particle.position.y = this.stageHeight * Math.random()
-            particle.velocity = { 
-                x: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
-                y: MaxPointSpeed - Math.random() * (MaxPointSpeed * 2),
-            }
-        }
-    }
-
-    redrawLines() {
-        this.lines.clear()
-
-        for (const [fromIndex, connectees] of Object.entries(this.connections)) {
-            for (const [toIndex, distance] of connectees) {
-                const fromPos = this.particles[fromIndex].position
-                const toPos   = this.particles[toIndex].position
-                const ratio = 1 - distance / MaxConnectionDistance
-
-                this.lines.lineStyle(0.3 + ratio * 0.7, 0xffffff, ratio)
-                this.lines.moveTo(fromPos.x, fromPos.y)
-                this.lines.lineTo(toPos.x, toPos.y)
-            }
-        }
-
-        this.lines.endFill()
+        
+        this.app.renderer.resize(window.innerWidth, window.innerHeight)
     }
 
     startFadeIn() {
@@ -302,18 +303,22 @@ export default class Background {
 
     reset() {
         this.updateParticleCount()
-        this.resetAllParticles()
+        resetParticles(this.particles, this.stageWidth, this.stageHeight)
+    }
+
+    destroy() {
+        this.app.destroy()
     }
 
     handleMouseMove = (event) => {
         const { x, y } = event.data.global
-        this.mousePos.x = x
-        this.mousePos.y = y
-        
+        this.mousePos.x = x - this.app.stage.position.x
+        this.mousePos.y = y - this.app.stage.position.y
+
         this.lines.mask.position.copyFrom(this.mousePos)
     }
 
-    handleWindowResize = (event) => {
+    handleWindowResize = () => {
         if (this.windowResizeTimeout) {
             clearTimeout(this.windowResizeTimeout)
         }
@@ -339,5 +344,9 @@ export default class Background {
         if (this.state === this.States.Stopping) {
             this.state = this.States.Stopped
         }
+    }
+
+    setScroll(value) {
+        this.app.stage.position.y = -value
     }
 }

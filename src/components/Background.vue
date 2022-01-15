@@ -38,6 +38,10 @@
             window.addEventListener("scroll", () => this.background.setScroll(window.scrollY))
             window.addEventListener("blur", () => this.background.stop())
             window.addEventListener("focus", () => this.background.run())
+        },
+
+        destroyed() {
+            this.background.destroy()
         }
     }
 </script>
