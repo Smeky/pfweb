@@ -29,9 +29,9 @@
                         </p>
                     </Project>
                 </Section>
-
-                <Section id="about">
                 
+                <Section id="about">
+                    <About />
                 </Section>
             </div>
         </Page>
@@ -56,7 +56,7 @@
     export default {
         data() {
             return {
-                isBackgroundActive: true,
+                isBackgroundActive: false,
                 isTmtdModalShown: false
             }
         },
