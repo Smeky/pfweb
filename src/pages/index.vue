@@ -3,8 +3,7 @@
         <!-- <Background :isRunning="isBackgroundActive" /> -->
         <Page>
             <Introduction />
-
-            <Navigation v-if="!isMobile()" />
+            <Navigation />
 
             <div>
                 <Section id="about">

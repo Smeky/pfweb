@@ -7,6 +7,7 @@
 <style lang="scss">
     .button {
         font-size: 20px;
+        line-height: 34px;
         padding: 6px 10px;
         cursor: pointer;
         user-select: none;
