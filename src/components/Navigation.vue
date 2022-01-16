@@ -57,9 +57,9 @@
                 isFixed: false,
                 navList: [
                     { id: "nav1", label: "Home",     href: "#root",     styles: { default: null, fixed: null }},
-                    { id: "nav2", label: "Skills",   href: "#skills",   styles: { default: null, fixed: null }},
-                    { id: "nav3", label: "Projects", href: "#projects", styles: { default: null, fixed: null }},
-                    { id: "nav4", label: "About",    href: "#about",    styles: { default: null, fixed: null }},
+                    { id: "nav2", label: "About",    href: "#about",    styles: { default: null, fixed: null }},
+                    { id: "nav3", label: "Skills",   href: "#skills",   styles: { default: null, fixed: null }},
+                    { id: "nav4", label: "Projects", href: "#projects", styles: { default: null, fixed: null }},
                 ],
             }
         },

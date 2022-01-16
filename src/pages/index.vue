@@ -1,11 +1,16 @@
 <template>
     <div id="root">
-        <Background :isRunning="isBackgroundActive" />
+        <!-- <Background :isRunning="isBackgroundActive" /> -->
         <Page>
             <Introduction />
-            <Navigation />
+
+            <Navigation v-if="!isMobile()" />
 
             <div>
+                <Section id="about">
+                    <About />
+                </Section>
+                
                 <Section id="skills">   
                     <Skills />
                 </Section>
@@ -28,10 +33,6 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt mattis laoreet. Nulla massa ligula, cursus nec mauris sit amet, dignissim lobortis nibh. Integer sed volutpat augue. Suspendisse sodales sem tempus mauris sodales condimentum. Nam faucibus ante eu enim pellentesque, aliquet aliquet nulla commodo. Fusce eu leo semper, finibus ex sed, egestas tortor. Ut vestibulum elit ante, sit amet porttitor est auctor ut. Vivamus in felis ac sapien fermentum elementum.
                         </p>
                     </Project>
-                </Section>
-                
-                <Section id="about">
-                    <About />
                 </Section>
             </div>
         </Page>

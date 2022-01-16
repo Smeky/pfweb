@@ -16,8 +16,17 @@
 </template>
 
 <style lang="scss">
+    @import "~/mixins.scss";
+
     .about {
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @include res-desktop {
+            flex-wrap: nowrap;
+        }
 
         .description {
             text-align: center;
