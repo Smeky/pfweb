@@ -49,5 +49,6 @@
         height: 320px;
         border-radius: 160px;
         margin-bottom: 16px;
+        filter: grayscale(0.6);
     }
 </style>
