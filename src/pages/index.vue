@@ -1,6 +1,6 @@
 <template>
     <div id="root">
-        <!-- <Background :isRunning="isBackgroundActive" /> -->
+        <Background :isRunning="isBackgroundActive" />
         <Page>
             <Introduction />
             <Navigation />
@@ -23,7 +23,7 @@
                                 It's a pet project of mine that I like to work on to keep myself a bit entertained.
                             </p>
 
-                            <Button @click.native="showTmtdModal">Play now</Button>
+                            <Button v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
                         </ProjectDescription>
                     </Project>
 

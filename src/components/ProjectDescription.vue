@@ -23,5 +23,9 @@
                 margin: 0 40px;
             }
         }
+
+        > .button {
+            margin-top: 50px;
+        }
     }
 </style>

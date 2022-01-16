@@ -9,7 +9,7 @@
     .introduction {
         text-align: center;
         font-size: 24px;
-        height: 300px;
+        padding: 60px 0 90px 0;
 
         p {
             display: inline-block;
@@ -20,6 +20,7 @@
             font-weight: 400;
             animation: fadein 1s ease-out;
             color: #d1d1d1;
+            margin: 0;
 
             @keyframes fadein {
                 from {

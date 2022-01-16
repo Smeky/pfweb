@@ -56,7 +56,7 @@
         }
 
         &.--fixed {
-            background-color: black;
+            background-color: #070a12;
             position: fixed;
             top: 0;
         }
