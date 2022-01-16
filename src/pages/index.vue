@@ -6,6 +6,10 @@
             <Navigation />
 
             <div>
+                <Section id="about">
+                    <About />
+                </Section>
+                
                 <Section id="skills">   
                     <Skills />
                 </Section>
@@ -19,7 +23,7 @@
                                 It's a pet project of mine that I like to work on to keep myself a bit entertained.
                             </p>
 
-                            <Button @click.native="showTmtdModal">Play now</Button>
+                            <Button v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
                         </ProjectDescription>
                     </Project>
 
@@ -28,10 +32,6 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt mattis laoreet. Nulla massa ligula, cursus nec mauris sit amet, dignissim lobortis nibh. Integer sed volutpat augue. Suspendisse sodales sem tempus mauris sodales condimentum. Nam faucibus ante eu enim pellentesque, aliquet aliquet nulla commodo. Fusce eu leo semper, finibus ex sed, egestas tortor. Ut vestibulum elit ante, sit amet porttitor est auctor ut. Vivamus in felis ac sapien fermentum elementum.
                         </p>
                     </Project>
-                </Section>
-                
-                <Section id="about">
-                    <About />
                 </Section>
             </div>
         </Page>

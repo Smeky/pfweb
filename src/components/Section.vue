@@ -6,11 +6,20 @@
 </template>
 
 <style lang="scss">
+    @import "~/mixins.scss";
+
     .section {
-        margin: 150px 0;
+        margin: 70px 0;
+
+        @include res-desktop {
+            margin: 150px 0;
+        }
 
         &:first-of-type {
-            margin: 0;
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
         }
     }
 

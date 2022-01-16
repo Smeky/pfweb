@@ -1,6 +1,7 @@
 export default {
     // Target: https://go.nuxtjs.dev/config-target
     target: "static",
+    ssr: false,
     
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -37,6 +38,7 @@ export default {
     buildModules: [
         // https://go.nuxtjs.dev/eslint
         // "@nuxtjs/eslint-module"  // Custom: disabled this so eslint isn't checked on runtime (checks after each rebuild in watch mode)
+        "@nuxtjs/device"
     ],
     
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -57,5 +59,9 @@ export default {
     router: {
         linkActiveClass: "router-link",
         linkExactActiveClass: "router-link-active",
+    },
+
+    server: {
+        port: 8080,
     }
 }

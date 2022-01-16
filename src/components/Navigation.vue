@@ -1,12 +1,28 @@
 <template>
     <div id="navbar">
-        <div class="navigation" v-bind:class="{ '--fixed': isFixed }">
+        <div class="navigation" 
+             v-if="$device.isMobile"
+             v-bind:class="{ '--fixed': isFixed }">
+
+            <Button v-for="navItem in navList"
+                    :id="navItem.id"
+                    :key="navItem.id"
+                    @click.native="() => handleNavClick(navItem.href)">
+
+                {{ navItem.label }}
+            </Button>
+        </div>
+
+        <div class="navigation --desktop"
+             v-else
+             v-bind:class="{ '--fixed': isFixed }">
+            
             <Button v-for="navItem in navList"
                     :id="navItem.id"
                     :key="navItem.id"
                     :style="isFixed ? navItem.styles.fixed : navItem.styles.default"
-                    @click.native="() => handleNavClick(navItem.href)"
-            >
+                    @click.native="() => handleNavClick(navItem.href)">
+
                 {{ navItem.label }}
             </Button>
         </div>
@@ -24,27 +40,43 @@
     .navigation {
         height: $navbar-height;
         display: flex;
+        justify-content: center;
         transition: all 0.5s ease;
+        z-index: 1;
+        background-color: none;
 
+        width: 100%;
         position: absolute;
         right: 50%;
         transform: translateX(50%);
-        z-index: 1;
 
         > .button {
-            height: 30px;
-            margin: 0 10px;
             transition: all 0.5s ease;
+            margin: 0 2px;
         }
 
         &.--fixed {
+            background-color: #070a12;
             position: fixed;
             top: 0;
-            right: 40px;
-            transform: translate(0%);
+        }
 
+        &.--desktop {
+            width: auto;
+            
             > .button {
-                margin: 0;
+                height: 30px;
+                margin: 0 10px;
+            }
+    
+            &.--fixed {
+                background-color: initial;
+                right: 40px;
+                transform: translate(0%);
+    
+                > .button {
+                    margin: 0;
+                }
             }
         }
     }
@@ -57,9 +89,9 @@
                 isFixed: false,
                 navList: [
                     { id: "nav1", label: "Home",     href: "#root",     styles: { default: null, fixed: null }},
-                    { id: "nav2", label: "Skills",   href: "#skills",   styles: { default: null, fixed: null }},
-                    { id: "nav3", label: "Projects", href: "#projects", styles: { default: null, fixed: null }},
-                    { id: "nav4", label: "About",    href: "#about",    styles: { default: null, fixed: null }},
+                    { id: "nav2", label: "About",    href: "#about",    styles: { default: null, fixed: null }},
+                    { id: "nav3", label: "Skills",   href: "#skills",   styles: { default: null, fixed: null }},
+                    { id: "nav4", label: "Projects", href: "#projects", styles: { default: null, fixed: null }},
                 ],
             }
         },
