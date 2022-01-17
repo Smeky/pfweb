@@ -1,3 +1,7 @@
+import * as pixi from "pixi.js"
+import { KawaseBlurFilter } from "pixi-filters"
+
+pixi.utils.skipHello()
 
 const LineShowRadius = 250
 const MaxConnectionDistance = 150
@@ -8,16 +12,6 @@ const FadeOutSpeed = 2
 
 const Vec2 = {
     distance: (a, b) => Math.hypot(b.x - a.x, b.y - a.y)
-}
-
-let pixi = null
-let KawaseBlurFilter = null
-
-async function loadPixi() {
-    pixi = await import("pixi.js")
-    pixi.utils.skipHello()
-
-    KawaseBlurFilter = (await import("pixi-filters")).KawaseBlurFilter
 }
 
 function getPageSize() {
@@ -136,15 +130,12 @@ export default class Background {
         this.state = this.States.Loading
         this.autoRun = false
     
-        loadPixi()
-            .then(() => {
-                this.state = this.States.Stopped
-                this.setup()
+        this.state = this.States.Stopped
+        this.setup()
 
-                if (this.autoRun) {
-                    this.run()
-                }
-            })
+        if (this.autoRun) {
+            this.run()
+        }
     }
 
     setup() {
