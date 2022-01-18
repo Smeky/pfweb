@@ -6,7 +6,7 @@ pixi.utils.skipHello()
 const LineShowRadius = 250
 const MaxConnectionDistance = 150
 const MaxPointSpeed = 30
-const ParticlesPer1000PxSqrd = 0.1
+const ParticlesPer100PxSqrd = 1
 const FadeInSpeed = 1
 const FadeOutSpeed = 2
 
@@ -31,7 +31,7 @@ function getPageSize() {
 }
 
 function calcParticleCount(width, height) {
-    return Math.floor((width * height) / 1000 * ParticlesPer1000PxSqrd)
+    return Math.floor((width * height) / (ParticlesPer100PxSqrd * 100 ** 2))
 }
 
 function createParticles(count, texture) {
