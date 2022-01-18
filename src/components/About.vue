@@ -35,7 +35,7 @@
             padding: 30px 20px;
 
             @include res-desktop {
-                margin: 0 50px;
+                margin: 0 40px;
             }
         }
 
