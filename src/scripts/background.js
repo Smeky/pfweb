@@ -128,14 +128,9 @@ export default class Background {
 
     constructor() {
         this.state = this.States.Loading
-        this.autoRun = false
     
         this.state = this.States.Stopped
         this.setup()
-
-        if (this.autoRun) {
-            this.run()
-        }
     }
 
     setup() {
@@ -274,11 +269,6 @@ export default class Background {
     }
 
     run() {
-        if (this.state === this.States.Loading) {
-            this.autoRun = true
-            return
-        }
-
         this.state = this.States.Running
         this.startFadeIn()
         
