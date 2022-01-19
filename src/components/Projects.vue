@@ -8,7 +8,7 @@
                     It's my current pet project that I like to work on to keep myself a bit entertained.
                 </p>
 
-                <Button v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
+                <Button class="play-button" v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
             </ProjectDescription>
         </Project>
 
@@ -47,7 +47,9 @@
 </template>
 
 <style lang="scss">
-    
+    .play-button {
+        font-size: 24px;
+    }
 </style>
 
 <script>

@@ -3,8 +3,8 @@
 - Finalize skills
     - Rethink their order, maybe different categorization
 - Add more projects
-    - Arcana
-    - C++ Tower defense
+    - ~~Arcana~~
+    - ~~C++ Tower defense~~
     - Mythic planner
     - Some python projects
 - Think of a nice way of adding links to project's sources
@@ -18,7 +18,7 @@
 - Font style
 - Try to find some better colors for background / general athmosfere
 - Side navbar should be more visible when there's not enough padding on the side
-- Bigger Play now button
+- ~~Bigger Play now button~~
 
 ### Background
 - Background's stage should be smaller and scroll relative (slower background scroll compared to page content)
