@@ -1,6 +1,6 @@
 <template>
     <div id="root">
-        <Background :isRunning="isBackgroundActive" />
+        <Background :isRunning="!isModalOpen" />
         <Page>
             <Introduction />
             <Navigation />
@@ -15,14 +15,10 @@
                 </Section>
 
                 <Section id="projects">
-                    <Projects />
+                    <Projects :onModalOpen="onModalOpen" :onModalClosed="onModalClosed" />
                 </Section>
             </div>
         </Page>
-
-        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
-            <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
-        </Modal>
 
         <Footer />
     </div>
@@ -40,20 +36,17 @@
     export default {
         data() {
             return {
-                isBackgroundActive: false,
-                isTmtdModalShown: false
+                isModalOpen: false
             }
         },
 
         methods: {
-            showTmtdModal() {
-                this.isTmtdModalShown = true
-                this.isBackgroundActive = false
+            onModalOpen() {
+                this.isModalOpen = true
             },
 
-            tmtdModalClosed() {
-                this.isTmtdModalShown = false
-                this.isBackgroundActive = true
+            onModalClosed() {
+                this.isModalOpen = false
             }
         }
     }

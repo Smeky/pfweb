@@ -7,6 +7,7 @@
                     <br/><br/>
                     It's my current pet project that I like to work on to keep myself a bit entertained.
                 </p>
+
                 <Button v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
             </ProjectDescription>
         </Project>
@@ -24,11 +25,60 @@
         <Project title="Arcana" link="https://github.com/Smeky/Arcana" brief="Game, 2D Rogue-like RPG">
             <ProjectDescription>
                 <p>
-                    My first big game that I've been developing for over 7 months during my high school days.
+                    My second game that I've been developing for over 7 months, still high school days. I even streamed the development process on Twitch.tv back then.
                     <br/><br/>
-                    This one is also in C++, additionally with Lua for scripting, using SFML for graphics and user input. Game-wise it is still my largest project to this day evethough I haven't touched it in years. 
+                    Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day evethough I haven't touched it in years. 
                 </p>
             </ProjectDescription>
         </Project>
+
+        <Project title="This website!" link="https://github.com/Smeky/pfweb" flipped>
+            <ProjectDescription>
+                <p>
+                    Did you know this website's complete source code is also available on <Link href="https://github.com/Smeky/pfweb" newTab>GitHub</Link>?
+                </p>
+            </ProjectDescription>
+        </Project>
+
+        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
+            <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
+        </Modal>
     </div>
 </template>
+
+<style lang="scss">
+    
+</style>
+
+<script>
+    export default {
+        props: {
+            onModalOpen: {
+                type: Function,
+                required: true,
+            },
+            onModalClosed: {
+                type: Function,
+                required: true,
+            },
+        },
+
+        data() {
+            return {
+                isTmtdModalShown: false,
+            }
+        },
+
+        methods: {
+            showTmtdModal() {
+                this.isTmtdModalShown = true
+                this.onModalOpen()
+            },
+
+            tmtdModalClosed() {
+                this.isTmtdModalShown = false
+                this.onModalClosed()
+            }
+        }
+    }
+</script>

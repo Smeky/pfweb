@@ -12,10 +12,13 @@
 - Add Contact section
 - Add some nice links to github & linkedin
 - Some form of slide show to project's images / vids
+- Give Play now some hint in !desktop mode that it will be available on desktops
 
 ### Styles
 - Font style
 - Try to find some better colors for background / general athmosfere
+- Side navbar should be more visible when there's not enough padding on the side
+- Bigger Play now button
 
 ### Background
 - Background's stage should be smaller and scroll relative (slower background scroll compared to page content)
