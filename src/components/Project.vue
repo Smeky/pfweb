@@ -1,6 +1,9 @@
 <template>
     <div class="project">
-        <h3 class="title">{{ title }}</h3>
+        <h3 class="title">
+            <Link :href="link" newTab>{{ title }}</Link>
+            <span class="brief" v-if="brief">{{ brief }}</span>
+        </h3>
         <div class="content" v-bind:class="{ '--flipped': flipped }">
             <div class="image">
                 <div class="img-placeholder"></div>
@@ -25,6 +28,14 @@
         font-size: 24px;
     }
 
+    .brief {
+        font-size: 17px;
+        font-weight: normal;
+        font-style: italic;
+        color: #808080;
+        margin-left: 14px;
+    }
+
     .content {
         display: flex;
         flex-direction: row-reverse;
@@ -45,7 +56,7 @@
             padding: 40px 20px 0 20px;
     
             @include res-desktop {
-                margin: 0 40px;
+                margin: 0 60px;
             }
         }
     }
@@ -56,14 +67,9 @@
         height: 200px;
         border-radius: 200px;
         
-        @include res-tablet {
+        @include res-desktop {
             width: 300px;
             height: 300px;
-        }
-
-        @include res-desktop {
-            width: 400px;
-            height: 400px;
         }
     }
 </style>
@@ -73,6 +79,8 @@
         props: {
             "title": String,
             "flipped": Boolean,
+            "brief": String,
+            "link": String,
         }
     }
 </script>

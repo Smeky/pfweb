@@ -10,7 +10,7 @@
                 <br/>
             <p>I tought myself how to program in high school trying to make games in C++ (link - Arcana, Tower Defense), which let me to a career in development. Over the years I have touched many projects, languages, libraries and frameworks. And even though I am capable of making wide range of stuff on my own, I prefer to be a team player!</p>
                 <br/>
-            <p>Today, you'll likely find me at a local cafe's bar, scrambling something on my laptop and chatting with everyone around. I still make games but purely as a hobby and my <i>current</i> focus is on creating websites and web apps</p>
+            <p>Today, you'll likely find me at a local cafe's bar, scrambling something on my laptop and chatting with everyone around</p>
 
         </div>
     </div>

@@ -1,0 +1,30 @@
+
+### Content
+- Finalize skills
+    - Rethink their order, maybe different categorization
+- Add more projects
+    - Arcana
+    - C++ Tower defense
+    - Mythic planner
+    - Some python projects
+- Think of a nice way of adding links to project's sources
+- Get those projects runnig & take pictures / vids
+- Add Contact section
+- Add some nice links to github & linkedin
+- Some form of slide show to project's images / vids
+
+### Styles
+- Font style
+- Try to find some better colors for background / general athmosfere
+
+### Background
+- Background's stage should be smaller and scroll relative (slower background scroll compared to page content)
+- We should add some interactivity to mobile
+    - Or at least draw lines in the current scroll viewport (shouldn't be too expensive on mobile)
+
+### Frontend
+- Use different image resolutions for each platform
+- Ensure the site works with slow throttling enabled
+
+### Backend
+- Put together a way to serve TMTD
