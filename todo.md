@@ -15,7 +15,7 @@
 - Give Play now some hint in !desktop mode that it will be available on desktops
 
 ### Styles
-- Font style
+- Font family
 - Try to find some better colors for background / general athmosfere
 - Side navbar should be more visible when there's not enough padding on the side
 - ~~Bigger Play now button~~
@@ -28,6 +28,7 @@
 ### Frontend
 - Use different image resolutions for each platform
 - Ensure the site works with slow throttling enabled
+- Add favicon
 
 ### Backend
 - Put together a way to serve TMTD

@@ -4,11 +4,7 @@
             <Link :href="link" newTab>{{ title }}</Link>
             <span class="brief" v-if="brief">{{ brief }}</span>
         </h3>
-        <div class="content" v-bind:class="{ '--flipped': flipped }">
-            <div class="image">
-                <div class="img-placeholder"></div>
-            </div>
-            
+        <div class="content">
             <slot></slot>
         </div>
     </div>
@@ -19,6 +15,10 @@
 
     .project {
         margin-bottom: 70px;
+
+        &:nth-child(2n) > .content {
+            flex-direction: row-reverse;
+        }
     }
 
     .title {
@@ -38,13 +38,9 @@
 
     .content {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-
-        &.--flipped {
-            flex-direction: row;
-        }
 
         @include res-desktop {
             flex-wrap: nowrap;
@@ -60,25 +56,12 @@
             }
         }
     }
-
-    .img-placeholder {
-        background-color: rgba(100, 100, 100, 0.2);
-        width: 200px;
-        height: 200px;
-        border-radius: 200px;
-        
-        @include res-desktop {
-            width: 300px;
-            height: 300px;
-        }
-    }
 </style>
 
 <script>
     export default {
         props: {
             "title": String,
-            "flipped": Boolean,
             "brief": String,
             "link": String,
         }

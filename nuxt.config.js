@@ -56,11 +56,6 @@ export default {
         }
     },
 
-    router: {
-        linkActiveClass: "router-link",
-        linkExactActiveClass: "router-link-active",
-    },
-
     server: {
         port: 8080,
     }

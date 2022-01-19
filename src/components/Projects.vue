@@ -1,6 +1,7 @@
 <template>
     <div>
         <Project title="Tower Defense">
+            <ProjectImage id="tmtd" :src="require('~/assets/tmtd1.png')" />
             <ProjectDescription>
                 <p>
                     A Tower Defense game in which I try to create several layers of mechanics to keep the gameplay interesting for more than just a few hours. The game design decsion behind this is inspired mainly by Path of exile. 
@@ -12,7 +13,8 @@
             </ProjectDescription>
         </Project>
 
-        <Project title="Tower Defense #1" link="https://github.com/Smeky/Tower-Defense-Game" brief="Game, 2D Tower defense" flipped>
+        <Project title="Tower Defense #1" link="https://github.com/Smeky/Tower-Defense-Game" brief="Game, 2D Tower defense">
+            <ProjectImage />
             <ProjectDescription>
                 <p>
                     My first game ever. I've made it in my third year of high school.
@@ -23,6 +25,7 @@
         </Project>
 
         <Project title="Arcana" link="https://github.com/Smeky/Arcana" brief="Game, 2D Rogue-like RPG">
+            <ProjectImage />
             <ProjectDescription>
                 <p>
                     My second game that I've been developing for over 7 months, still high school days. I even streamed the development process on Twitch.tv back then.
@@ -32,7 +35,8 @@
             </ProjectDescription>
         </Project>
 
-        <Project title="This website!" link="https://github.com/Smeky/pfweb" flipped>
+        <Project title="This website!" link="https://github.com/Smeky/pfweb">
+            <ProjectImage />
             <ProjectDescription>
                 <p>
                     Did you know this website's complete source code is also available on <Link href="https://github.com/Smeky/pfweb" newTab>GitHub</Link>?
@@ -49,6 +53,10 @@
 <style lang="scss">
     .play-button {
         font-size: 24px;
+    }
+
+    .project-image#tmtd {
+        filter: grayscale(0.3);
     }
 </style>
 

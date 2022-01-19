@@ -19,7 +19,7 @@
         border-radius: 64px;
 
         p {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.55);
             font-weight: 600;
             text-align: center;
             line-height: 17px;
