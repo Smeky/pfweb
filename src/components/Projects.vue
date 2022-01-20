@@ -17,7 +17,7 @@
             <ProjectImage />
             <ProjectDescription>
                 <p>
-                    My first game ever. I've made it in my third year of high school.
+                    Made this one in my third year of high school and it was my first game ever!
                     <br/><br/>
                     The game is written in C++, using SDL for simle graphics and user input.
                     <br/>
