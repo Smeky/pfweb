@@ -19,7 +19,9 @@
                 <p>
                     My first game ever. I've made it in my third year of high school.
                     <br/><br/>
-                    The game is written in C++, using SDL for simle graphics and user input. <i>There's a playable <Link href="https://github.com/Smeky/Tower-Defense-Game" newTab>"Smeky's TD.exe"</Link> in project's root directory.</i>
+                    The game is written in C++, using SDL for simle graphics and user input.
+                    <br/>
+                    <i>There's a playable <Link href="https://github.com/Smeky/Tower-Defense-Game" newTab>"Smeky's TD.exe"</Link> in project's root directory.</i>
                 </p>
             </ProjectDescription>
         </Project>
