@@ -30,7 +30,9 @@
             <ProjectImage />
             <ProjectDescription>
                 <p>
-                    My second game that I've been developing for over 7 months, still high school days. I even streamed the development process on Twitch.tv back then.
+                    My second game that I've been developing for over 7 months, still high school days.
+                    <br/>
+                    I even streamed the development process on Twitch.tv back then.
                     <br/><br/>
                     Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day evethough I haven't touched it in years. 
                 </p>

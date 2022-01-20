@@ -26,6 +26,14 @@
         padding-bottom: 12px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 24px;
+
+        display: flex;
+        flex-direction: column;
+
+        @include res-tablet {
+            flex-direction: row;
+            align-items: center;
+        }
     }
 
     .brief {
@@ -33,7 +41,10 @@
         font-weight: normal;
         font-style: italic;
         color: #808080;
-        margin-left: 14px;
+        
+        @include res-tablet {
+            margin-left: 14px;
+        }
     }
 
     .content {

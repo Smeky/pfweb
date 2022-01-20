@@ -39,7 +39,7 @@
             }
 
             > .highlight {
-                font-size: 22px;
+                font-size: 20px;
                 font-weight: normal;
             }
         }
@@ -50,10 +50,15 @@
     }
 
     .profile-pic {
-        width: 320px;
-        height: 320px;
+        width: 230px;
+        height: 230px;
         border-radius: 160px;
         margin-bottom: 16px;
         filter: grayscale(1);
+
+        @include res-tablet {
+            width: 320px;
+            height: 320px;
+        }
     }
 </style>

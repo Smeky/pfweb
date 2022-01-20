@@ -43,7 +43,6 @@
         }
 
         .description {
-            font-style: italic;
             font-size: 14px;
             margin-top: 3px;
             color: #a6a6a6;

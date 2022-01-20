@@ -15,7 +15,7 @@
 - Give Play now some hint in !desktop mode that it will be available on desktops
 
 ### Styles
-- Font family
+- ~~Font family~~
 - Try to find some better colors for background / general athmosfere
 - Side navbar should be more visible when there's not enough padding on the side
 - ~~Bigger Play now button~~
