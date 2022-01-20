@@ -90,21 +90,27 @@
             return {
                 isFixed: false,
                 navList: [
-                    { id: "nav1", label: "Home",     href: "#root",     styles: { default: null, fixed: null }},
-                    { id: "nav2", label: "About",    href: "#about",    styles: { default: null, fixed: null }},
-                    { id: "nav3", label: "Skills",   href: "#skills",   styles: { default: null, fixed: null }},
-                    { id: "nav4", label: "Projects", href: "#projects", styles: { default: null, fixed: null }},
+                    { id: "nav1", label: "Home",     href: "#root",     styles: { default: { left: 0, top: 0 }, fixed: null }},
+                    { id: "nav2", label: "About",    href: "#about",    styles: { default: { left: 0, top: 0 }, fixed: null }},
+                    { id: "nav3", label: "Skills",   href: "#skills",   styles: { default: { left: 0, top: 0 }, fixed: null }},
+                    { id: "nav4", label: "Projects", href: "#projects", styles: { default: { left: 0, top: 0 }, fixed: null }},
                 ],
+
+            }
+        },
+
+        watch: {
+            isFixed(isFixed) {
+                if (isFixed) {
+                    this.navList.forEach((navItem, index) => {
+                        navItem.styles.fixed = this.getItemFixedStyle(navItem.id, index)
+                    })
+                }
             }
         },
 
         mounted() {
             window.addEventListener("scroll", this.handleScroll)
-
-            this.navList.forEach((navItem, index) => {
-                navItem.styles.default = { left: 0, top: 0 }
-                navItem.styles.fixed   = this.getItemFixedStyle(navItem.id, index)
-            })
         },
         
         destroyed() {
@@ -118,12 +124,6 @@
 
             handleNavClick(href) {
                 const anchor = document.getElementById(href.replace("#", ""))
-                
-                if (!anchor) {
-                    console.error(`Invalid href "${href}"`)
-                    return
-                }
-
                 window.scrollTo(0, anchor.offsetTop - window.innerHeight * 0.15)
             },
 
