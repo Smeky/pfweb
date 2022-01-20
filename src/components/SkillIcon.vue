@@ -20,13 +20,13 @@
 
         p {
             color: rgba(255, 255, 255, 0.55);
-            font-weight: 600;
             text-align: center;
             line-height: 17px;
+            letter-spacing: 0.5px;
             
             &::first-letter {
-                font-size: 22px;
-                font-weight: bold;
+                font-size: 25px;
+                font-weight: normal;
             }
         }
     }
