@@ -53,6 +53,8 @@
         > .button {
             transition: all 0.5s ease;
             margin: 0 2px;
+            font-weight: normal;
+            font-size: 24px;
         }
 
         &.--fixed {

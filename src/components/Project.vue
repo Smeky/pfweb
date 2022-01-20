@@ -11,7 +11,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "~/mixins.scss";
+    @import "~/styles/mixins.scss";
 
     .project {
         margin-bottom: 70px;

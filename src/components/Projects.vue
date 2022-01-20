@@ -1,7 +1,7 @@
 <template>
     <div>
         <Project title="Tower Defense">
-            <ProjectImage id="tmtd" :src="require('~/assets/tmtd1.png')" />
+            <ProjectImage id="tmtd" :src="require('~/assets/images/tmtd1.png')" />
             <ProjectDescription>
                 <p>
                     A Tower Defense game in which I try to create several layers of mechanics to keep the gameplay interesting for more than just a few hours. The game design decsion behind this is inspired mainly by Path of exile. 

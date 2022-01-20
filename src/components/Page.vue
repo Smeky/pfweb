@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-    @import "~/mixins.scss";
+    @import "~/styles/mixins.scss";
 
     .page {
         padding: 0 30px;

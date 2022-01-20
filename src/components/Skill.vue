@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss">
-    @import "~/mixins.scss";
+    @import "~/styles/mixins.scss";
 
     $skill-bg-height: 4px;
     $skill-progress-height: 7px;

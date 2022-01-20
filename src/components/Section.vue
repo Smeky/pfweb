@@ -6,7 +6,7 @@
 </template>
 
 <style lang="scss">
-    @import "~/mixins.scss";
+    @import "~/styles/mixins.scss";
 
     .section {
         margin: 70px 0;

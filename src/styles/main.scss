@@ -1,9 +1,13 @@
+@import "./fonts";
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+    // font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     background-color: #0d1221;
     color: #ffffff;
     overflow-y: overlay;
