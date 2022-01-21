@@ -17,6 +17,11 @@
         &:hover {
             text-decoration: none;
         }
+
+        &:after,
+        &:hover:after {
+            display: none;
+        }
         
         > img {
             margin-left: 2px;

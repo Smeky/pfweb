@@ -5,24 +5,19 @@
 </template>
 
 <style lang="scss">
+    @import "~/styles/mixins.scss";
+
     .link {
         text-decoration: none;
         font-weight: bold;
         color: #ffffff;
+        position: relative;
 
         &:active {
             color: inherit;
         }
 
-        &:hover {
-            text-decoration: underline;
-        }
-
-        &:not([href]) {
-            &:hover {
-                text-decoration: none;
-            }
-        }
+        @include text-hover-effect;
     }
 </style>
 

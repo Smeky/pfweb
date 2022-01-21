@@ -69,6 +69,10 @@
             font-weight: normal;
             margin-top: 40px;
         }
+        
+        .download {
+            padding: 4px 6px;
+        }
 
         @include res-tablet {
             .source-link {
