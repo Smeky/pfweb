@@ -1,5 +1,5 @@
 <template>
-    <a class="link" :href="href" :target="newTab ? '_blank' : ''" rel="noopener noreferrer">
+    <a class="link" :target="newTab ? '_blank' : ''" rel="noopener noreferrer">
         <slot></slot>
     </a>
 </template>
@@ -29,7 +29,6 @@
 <script>
     export default {
         props: {
-            href: String,
             newTab: {
                 type: Boolean,
                 defaut: false,

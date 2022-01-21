@@ -22,7 +22,7 @@
                     The game is written in C++, using SDL for simle graphics and user input.
                 </p>
                 
-                <Button class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Button>
+                <DownloadLink href="~/assets/files/Smeky's TD public ver 0.2.4.zip">Download now</DownloadLink>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
@@ -38,7 +38,7 @@
                     Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day eventhough I haven't touched it in years.
                 </p>
 
-                <Button class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Button>
+                <DownloadLink href="~/assets/files/Arcana pre-alpha v0.07.zip">Download now</DownloadLink>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
@@ -47,7 +47,7 @@
             <ProjectImage />
             <ProjectDescription>
                 <p>
-                    Of course this website must be listed here!
+                    Of course this website must not be missing!
                 </p>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />
@@ -62,17 +62,23 @@
 <style lang="scss">
     @import "~/styles/mixins.scss";
 
-    .project .project-button {
-        font-size: 24px;
-    }
+    .project {
+        .project-button,
+        .download {
+            font-size: 24px;
+            font-weight: normal;
+            margin-top: 40px;
+        }
 
-    @include res-tablet {
-        .project .source-link {
-            position: absolute;
-            top: 0;
-            right: 0;
+        @include res-tablet {
+            .source-link {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
         }
     }
+
 </style>
 
 <script>
