@@ -30,7 +30,13 @@
 </template>
 
 <style lang="scss">
-    $navbar-height: 50px;
+    @import "~/styles/mixins.scss";
+
+    $navbar-height: 44px;
+
+    @include res-tablet {
+        $navbar-height: 50px;
+    }
 
     #navbar {
         height: $navbar-height;
@@ -53,8 +59,12 @@
         > .button {
             transition: all 0.5s ease;
             margin: 0 2px;
-            font-weight: normal;
-            font-size: 24px;
+            font-size: 22px;
+
+            @include res-tablet {
+                font-size: 24px;
+                font-weight: normal;
+            }
         }
 
         &.--fixed {

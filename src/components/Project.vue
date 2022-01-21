@@ -1,7 +1,7 @@
 <template>
     <div class="project">
         <h3 class="title">
-            <Link :href="link" newTab>{{ title }}</Link>
+            {{ title }}
             <span class="brief" v-if="brief">{{ brief }}</span>
         </h3>
         <div class="content">
@@ -15,15 +15,21 @@
 
     .project {
         margin-bottom: 70px;
+        position: relative;
 
         &:nth-child(2n) > .content {
             flex-direction: row-reverse;
         }
     }
 
+    .project .project-image {
+        margin-top: 10px;
+    }
+
     .title {
         padding-left: 16px;
         padding-bottom: 12px;
+        margin-bottom: 6px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 24px;
 
@@ -52,6 +58,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        position: relative;
+        padding-top: 12px;
 
         @include res-desktop {
             flex-wrap: nowrap;
@@ -74,7 +82,6 @@
         props: {
             "title": String,
             "brief": String,
-            "link": String,
         }
     }
 </script>

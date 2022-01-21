@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="projects">
         <Project title="Tower Defense">
             <ProjectImage id="tmtd" :src="require('~/assets/images/tmtd1.png')" />
             <ProjectDescription>
@@ -13,7 +13,7 @@
             </ProjectDescription>
         </Project>
 
-        <Project title="Tower Defense #1" link="https://github.com/Smeky/Tower-Defense-Game" brief="Game, 2D Tower defense">
+        <Project title="Tower Defense #1" brief="Game, 2D Tower defense">
             <ProjectImage />
             <ProjectDescription>
                 <p>
@@ -24,9 +24,10 @@
                     <i>There's a playable <Link href="https://github.com/Smeky/Tower-Defense-Game" newTab>"Smeky's TD.exe"</Link> in project's root directory.</i>
                 </p>
             </ProjectDescription>
+            <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
 
-        <Project title="Arcana" link="https://github.com/Smeky/Arcana" brief="Game, 2D Rogue-like RPG">
+        <Project title="Arcana" brief="Game, 2D Rogue-like RPG">
             <ProjectImage />
             <ProjectDescription>
                 <p>
@@ -37,15 +38,17 @@
                     Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day evethough I haven't touched it in years. 
                 </p>
             </ProjectDescription>
+            <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
 
-        <Project title="This website!" link="https://github.com/Smeky/pfweb">
+        <Project title="This website!">
             <ProjectImage />
             <ProjectDescription>
                 <p>
-                    Did you know this website's complete source code is also available on <Link href="https://github.com/Smeky/pfweb" newTab>GitHub</Link>?
+                    This website's complete source code is also available on <Link href="https://github.com/Smeky/pfweb" newTab>GitHub</Link>
                 </p>
             </ProjectDescription>
+            <SrcCodeLink href="https://github.com/Smeky/pfweb" />
         </Project>
 
         <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
@@ -55,12 +58,22 @@
 </template>
 
 <style lang="scss">
+    @import "~/styles/mixins.scss";
+
     .play-button {
         font-size: 24px;
     }
 
     .project-image#tmtd {
         filter: grayscale(0.3);
+    }
+
+    @include res-tablet {
+        .project .source-link {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 </style>
 

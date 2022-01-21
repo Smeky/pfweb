@@ -1,9 +1,11 @@
 <template>
-    <a :href="href" :target="newTab ? '_blank' : ''" rel="noopener noreferrer"><slot></slot></a>
+    <a class="link" :href="href" :target="newTab ? '_blank' : ''" rel="noopener noreferrer">
+        <slot></slot>
+    </a>
 </template>
 
 <style lang="scss">
-    a {
+    .link {
         text-decoration: none;
         font-weight: bold;
         color: #ffffff;
@@ -14,6 +16,12 @@
 
         &:hover {
             text-decoration: underline;
+        }
+
+        &:not([href]) {
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 </style>
