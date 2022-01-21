@@ -9,7 +9,9 @@
                     It's my current pet project that I like to work on to keep myself a bit entertained.
                 </p>
 
-                <Button class="project-button" v-if="$device.isDesktop" @click.native="showTmtdModal">Play now</Button>
+                <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to play right here">
+                    <Button class="project-button" @click.native="showTmtdModal">Play now</Button>
+                </OnPlatform>
             </ProjectDescription>
         </Project>
 
@@ -21,8 +23,10 @@
                     <br/><br/>
                     The game is written in C++, using SDL for simle graphics and user input.
                 </p>
-                
-                <Link class="download" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Link>
+
+                <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
+                    <Link class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Link>
+                </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
@@ -38,7 +42,9 @@
                     Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day eventhough I haven't touched it in years.
                 </p>
 
-                <Link class="download" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Link>
+                <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
+                    <Link class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Link>
+                </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
@@ -63,15 +69,14 @@
     @import "~/styles/mixins.scss";
 
     .project {
-        .project-button,
-        .download {
+        .project-button {
+            padding: 2px 6px;
             font-size: 24px;
             font-weight: normal;
-            margin-top: 40px;
         }
-        
-        .download {
-            padding: 4px 6px;
+
+        .platform {
+            margin-top: 40px;
         }
 
         @include res-tablet {
@@ -82,7 +87,6 @@
             }
         }
     }
-
 </style>
 
 <script>
