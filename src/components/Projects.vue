@@ -22,7 +22,7 @@
                     The game is written in C++, using SDL for simle graphics and user input.
                 </p>
                 
-                <DownloadLink href="~/assets/files/Smeky's TD public ver 0.2.4.zip">Download now</DownloadLink>
+                <Link class="download" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Link>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
@@ -38,7 +38,7 @@
                     Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day eventhough I haven't touched it in years.
                 </p>
 
-                <DownloadLink href="~/assets/files/Arcana pre-alpha v0.07.zip">Download now</DownloadLink>
+                <Link class="download" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Link>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
