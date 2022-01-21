@@ -7,7 +7,7 @@
     - ~~C++ Tower defense~~
     - Mythic planner
     - Some python projects
-- Think of a nice way of adding links to project's sources
+- ~~Think of a nice way of adding links to project's sources~~
 - Get those projects runnig & take pictures / vids
 - Add Contact section
 - Add some nice links to github & linkedin
