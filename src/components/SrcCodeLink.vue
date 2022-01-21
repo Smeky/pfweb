@@ -13,9 +13,11 @@
         padding: 3px 3px 3px 6px;
         border-radius: 6px;
         font-weight: normal;
+        transition: color 0.3s;
 
         &:hover {
             text-decoration: none;
+            color: #fff675;
         }
 
         &:after,
