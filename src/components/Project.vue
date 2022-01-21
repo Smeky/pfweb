@@ -32,6 +32,7 @@
         margin-bottom: 6px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 24px;
+        font-weight: normal;
 
         display: flex;
         flex-direction: column;

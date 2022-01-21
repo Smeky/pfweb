@@ -14,6 +14,10 @@
         justify-content: center;
         padding-bottom: 40px;
 
+        @include res-tablet {
+            padding-bottom: 0;
+        }
+
         > p {
             text-align: center;
             font-size: 18px;

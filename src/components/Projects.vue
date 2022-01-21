@@ -1,7 +1,7 @@
 <template>
     <div class="projects">
-        <Project id="tmtd" title="Tower Defense">
-            <ProjectImage :src="require('~/assets/images/tmtd1.png')" />
+        <Project id="tmtd" title="TM TD" brief="Browser game, 2D Tower Defense">
+            <ProjectImage :src="require('~/assets/images/tmtd.png')" />
             <ProjectDescription>
                 <p>
                     A Tower Defense game in which I try to create several layers of mechanics to keep the gameplay interesting for more than just a few hours. The game design decision behind this is inspired mainly by Path of exile. 
@@ -13,22 +13,22 @@
             </ProjectDescription>
         </Project>
 
-        <Project title="Tower Defense #1" brief="Game, 2D Tower defense">
-            <ProjectImage />
+        <Project id="smekystd" title="Smeky's TD" brief="Game, 2D Tower defense">
+            <ProjectImage :src="require('~/assets/images/smekystd.png')" />
             <ProjectDescription>
                 <p>
                     Made this one in my third year of high school and it was my first game ever!
                     <br/><br/>
                     The game is written in C++, using SDL for simle graphics and user input.
-                    <br/>
-                    <i>There's a playable <Link href="https://github.com/Smeky/Tower-Defense-Game" newTab>"Smeky's TD.exe"</Link> in project's root directory.</i>
                 </p>
+                
+                <Button class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Button>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
 
         <Project id="arcana" title="Arcana" brief="Game, 2D Rogue-like RPG">
-            <ProjectImage :src="require('~/assets/images/arcana6.png')"/>
+            <ProjectImage :src="require('~/assets/images/arcana.png')"/>
             <ProjectDescription>
                 <p>
                     My second game that I've been developing for over 7 months, still high school days.
@@ -43,11 +43,11 @@
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
 
-        <Project title="This website!">
+        <Project title="My portfolio website!">
             <ProjectImage />
             <ProjectDescription>
                 <p>
-                    This website's complete source code is also available on <Link href="https://github.com/Smeky/pfweb" newTab>GitHub</Link>
+                    Of course this website must be listed here!
                 </p>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />
@@ -64,18 +64,6 @@
 
     .project .project-button {
         font-size: 24px;
-    }
-
-    #tmtd .project-image > img {
-        filter: grayscale(0.3);
-    }
-
-    #arcana .project-image > img {
-        position: relative;
-        left: 0px;
-        top: 62px;
-        transform: scale(1.7);
-        filter: grayscale(0.4);
     }
 
     @include res-tablet {
