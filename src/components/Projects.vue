@@ -35,7 +35,7 @@
                     <br/>
                     I even streamed the development process on Twitch.tv back then.
                     <br/><br/>
-                    Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day evethough I haven't touched it in years.
+                    Written in C++ for core engine and Lua for scripting most of the game components. SFML for graphics and user input. Game-wise it is still my largest project to this day eventhough I haven't touched it in years.
                 </p>
 
                 <Button class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Button>
