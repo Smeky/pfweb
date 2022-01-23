@@ -15,6 +15,18 @@
             </ProjectDescription>
         </Project>
 
+        <Project id="mythicplanner" title="Mythic Planner" brief="Site, shared live editting">
+            <ProjectImage :src="require('~/assets/images/mythicplanner.png')" />
+            <ProjectDescription>
+                <p>
+                    A website for planning Mythic+ dungeon routes in World of Warcraft. It involved everythig you'd expect from a web app. Authentication, databases and even live document editting.
+                    <br/><br/>
+                    Express, MongoDB & socket.io (live editting) on Backend and React, MobX & Konva on the Frontend. 
+                </p>
+            </ProjectDescription>
+            <SrcCodeLink href="https://github.com/Smeky/MythicPlanner" />
+        </Project>
+
         <Project id="smekystd" title="Smeky's TD" brief="Game, 2D Tower defense">
             <ProjectImage :src="require('~/assets/images/smekystd.png')" />
             <ProjectDescription>
