@@ -19,7 +19,7 @@
             <ProjectImage :src="require('~/assets/images/mythicplanner.png')" />
             <ProjectDescription>
                 <p>
-                    A website for planning Mythic+ dungeon routes in World of Warcraft. It involved everythig you'd expect from a web app. Authentication, databases and even live document editting.
+                    A website for planning Mythic+ dungeon routes in World of Warcraft I mad back in 2018. It involved everything you'd expect from a Web app - authentication, databases and even live document editting.
                     <br/><br/>
                     Express, MongoDB & socket.io (live editting) on Backend and React, MobX & Konva on the Frontend. 
                 </p>
@@ -80,7 +80,15 @@
 <style lang="scss">
     @import "~/styles/mixins.scss";
 
+    #mythicplanner .project-image {
+        filter: brightness(2);
+    }
+
     .project {
+        &:nth-child(2n) > .content {
+            flex-direction: row-reverse;
+        }
+
         .project-button {
             padding: 2px 6px;
             font-size: 24px;

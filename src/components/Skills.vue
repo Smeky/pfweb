@@ -12,7 +12,7 @@
             <SkillIcon :label="'JS'" />
         </Skill>
         
-        <Skill v-bind:progress="100" description="Trust me, I am fast - VSCode is work of art">
+        <Skill v-bind:progress="100" description="Trust me, I am fast - VSCode is a work of art!">
             <SkillIcon :label="'Code editting'" />
         </Skill>
         

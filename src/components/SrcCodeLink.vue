@@ -12,12 +12,12 @@
         background-color: rgba(0, 0, 0, 0.35);
         padding: 3px 3px 3px 6px;
         border-radius: 6px;
-        font-weight: normal;
+        font-weight: lighter;
         transition: color 0.3s;
 
         &:hover {
             text-decoration: none;
-            color: #fff675;
+            color: #ffffff;
         }
 
         &:after,

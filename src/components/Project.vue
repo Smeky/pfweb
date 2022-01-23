@@ -16,10 +16,6 @@
     .project {
         margin-bottom: 70px;
         position: relative;
-
-        &:nth-child(2n) > .content {
-            flex-direction: row-reverse;
-        }
     }
 
     .project .project-image {
@@ -64,6 +60,8 @@
 
         @include res-desktop {
             flex-wrap: nowrap;
+            padding-top: 24px;
+            padding-right: 10px;
         }
 
         > p {
