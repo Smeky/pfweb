@@ -5,14 +5,14 @@
 - Add more projects
     - ~~Arcana~~
     - ~~C++ Tower defense~~
-    - Mythic planner
+    - ~~Mythic planner~~
     - Some python projects
 - ~~Think of a nice way of adding links to project's sources~~
-- Get those projects runnig & take pictures / vids
+- ~~Get those projects runnig & take pictures / vids~~
 - Add Contact section
 - Add some nice links to github & linkedin
 - Some form of slide show to project's images / vids
-- Give Play now some hint in !desktop mode that it will be available on desktops
+- ~~Give Play now some hint in !desktop mode that it will be available on desktops~~
 
 ### Styles
 - ~~Font family~~
@@ -26,7 +26,8 @@
     - Or at least draw lines in the current scroll viewport (shouldn't be too expensive on mobile)
 
 ### Frontend
-- Use different image resolutions for each platform
+- Implement Nuxt-image - img performance & device resolution
+- Add slideshow
 - Ensure the site works with slow throttling enabled
 - Add favicon
 
