@@ -14,6 +14,8 @@
         height: 200px;
         border-radius: 200px;
         overflow: hidden;
+        outline: 1px solid #ffffff1a;
+        outline-offset: 1px;
 
         @include res-tablet {
             max-width: 300px;

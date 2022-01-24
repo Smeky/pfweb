@@ -31,11 +31,11 @@
         font-weight: normal;
 
         display: flex;
+        align-items: baseline;
         flex-direction: column;
 
         @include res-tablet {
             flex-direction: row;
-            align-items: center;
         }
     }
 

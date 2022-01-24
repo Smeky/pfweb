@@ -13,6 +13,7 @@
         align-items: center;
         justify-content: center;
         padding-bottom: 40px;
+        width: 100%;
 
         @include res-tablet {
             padding-bottom: 0;
