@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-    .source-link {
+    .link.source-link {
         display: inline-flex;
         align-items: center;
         color: gray;
