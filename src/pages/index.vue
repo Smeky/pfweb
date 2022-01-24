@@ -3,6 +3,23 @@
         <Background :isRunning="!isModalOpen" />
         <Page>
             <Introduction />
+
+            <Modal :open="slides">
+                <Slideshow v-slot="{ current }">
+                    <Slide key="arcana" :currentSlide="current">
+                        <img src="~/assets/images/arcana.png" />
+                    </Slide>
+                    <Slide key="mythicplanner" :currentSlide="current">
+                        <img src="~/assets/images/mythicplanner.png" />
+                    </Slide>
+                    <Slide key="smekystd" :currentSlide="current">
+                        <img src="~/assets/images/smekystd.png" />
+                    </Slide>
+                    <Slide key="tmtd" :currentSlide="current">
+                        <img src="~/assets/images/tmtd.png" />
+                    </Slide>
+                </Slideshow>
+            </Modal>
             <Navigation />
 
             <div>
@@ -36,7 +53,8 @@
     export default {
         data() {
             return {
-                isModalOpen: false
+                isModalOpen: false,
+                slides: false,
             }
         },
 
@@ -48,6 +66,10 @@
             onModalClosed() {
                 this.isModalOpen = false
             }
+        },
+
+        mounted() {
+            setTimeout(() => { this.slides = true }, 500)
         }
     }
 </script>

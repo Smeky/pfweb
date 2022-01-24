@@ -33,3 +33,11 @@
 
 ### Backend
 - Put together a way to serve TMTD
+
+
+
+### Backlog
+- Fix Modal
+    - It shouldn't be in the DOM while open=false
+    - Prefer v-if on the Modal element instead of :open
+    - 

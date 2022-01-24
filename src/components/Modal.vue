@@ -3,7 +3,7 @@
         @after-enter="contentVisible = true"
         @before-leave="contentVisible = false">
         
-        <div class="modal" v-on:click="onClose" v-if="open">
+        <div class="modal" @click="handleClick" v-if="open">
 
             <transition name="modal-content">
                 <div class="modal-content" v-if="contentVisible">
@@ -95,20 +95,38 @@
                 type: Boolean,
             },
             onClose: {
-                default: null,
+                default: undefined,
                 type: Function,
             }
         },
         
         watch: {
-            open: (isOpen) => {
+            open(isOpen) {
+                this.handleOpenChange(isOpen)
+            }
+        },
+
+        mounted() {
+            if (this.open) {
+                this.handleOpenChange(this.open)
+            }
+        },
+
+        methods: {
+            handleOpenChange(isOpen) {
                 if (isOpen) {
                     document.body.classList.add("modal-open")
                 }
                 else {
                     document.body.classList.remove("modal-open")
+                }      
+            },
+
+            handleClick() {
+                if (!!this.onClose) {
+                    this.onClose()
                 }
             }
-        },
+        }
     }
 </script>

@@ -71,7 +71,7 @@
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />
         </Project>
 
-        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
+        <Modal v-if="isTmtdModalShown" :onClose="tmtdModalClosed">
             <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
         </Modal>
     </div>
