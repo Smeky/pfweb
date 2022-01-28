@@ -1,27 +1,16 @@
 <template>
-    <transition name="slide">
+    <!-- <transition name="slide"> -->
         <div class="slide" v-show="currentSlide === $vnode.key">
             <slot></slot>
         </div>
-    </transition>
+    <!-- </transition> -->
 </template>
 
 <style lang="scss">
     .slide {
-        position: absolute;
-        left: 0;
-
-        &-enter-active {
-            transition: all 0.5s;
-        }
-
-        &-enter {
-            left: 100%;
-        }
-
-        &-enter-to {
-            left: 0;
-        }
+        // &-enter-active, &-leave-active {
+        //     transition: position 0.5s;
+        // }
     }
 </style>
 

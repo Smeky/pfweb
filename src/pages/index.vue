@@ -4,7 +4,7 @@
         <Page>
             <Introduction />
 
-            <Modal :open="slides">
+            <Modal :open="slides" :onClose="() => slides = !slides">
                 <Slideshow v-slot="{ current }">
                     <Slide key="arcana" :currentSlide="current">
                         <img src="~/assets/images/arcana.png" />
@@ -27,7 +27,7 @@
                     <About />
                 </Section>
                 
-                <Section id="skills">   
+                <Section id="skills">
                     <Skills />
                 </Section>
 

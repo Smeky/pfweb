@@ -62,6 +62,10 @@
     }
 
     .modal-content {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+
         &-enter-active {
             animation: fadein 0.5s;
         }

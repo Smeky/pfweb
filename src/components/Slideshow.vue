@@ -15,7 +15,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-
+        width: 100%;
         max-width: max(1024px, 80vw);
     }
 
@@ -51,7 +51,7 @@
         display: flex;
         justify-content: center;
         user-select: none;
-        position: relative;
+        width: 100%;
     }
 </style>
 
@@ -70,13 +70,17 @@
         },
 
         methods: {
-            handlePrevClick() {
+            handlePrevClick(event) {
+                event.stopPropagation()
+                
                 if (this.slideIndex > 0) {
                     this.slideIndex--
                 }
             },
 
-            handleNextClick() {
+            handleNextClick(event) {
+                event.stopPropagation()
+
                 if (this.slideIndex < this.slides.length - 1) {
                     this.slideIndex++
                 }
