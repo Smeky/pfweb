@@ -1,10 +1,10 @@
 <template>
     <div class="projects">
         <Project id="tmtd" title="TM TD" brief="Browser game, 2D Tower Defense">
-            <ProjectImage
-                class="--clickable"
-                @click.native="slides = true" 
-                :src="require('~/assets/images/tmtd.png')" />
+            <ProjectImage class="--clickable" @click.native="slides = true">
+                <img src="~/assets/images/tmtd.png" />
+            </ProjectImage>
+            
             <ProjectDescription>
                 <p>
                     A Tower Defense game in which I try to create several layers of mechanics to keep the gameplay interesting for more than just a few hours. The game design decision behind this is inspired mainly by Path of exile. 
@@ -19,7 +19,7 @@
         </Project>
 
         <Project id="mythicplanner" title="Mythic Planner" brief="Site, shared live editting">
-            <ProjectImage :src="require('~/assets/images/mythicplanner.png')" />
+            <ProjectImage><img src="~/assets/images/mythicplanner.png" /></ProjectImage> 
             <ProjectDescription>
                 <p>
                     A website for planning Mythic+ dungeon routes in World of Warcraft I mad back in 2018. It involved everything you'd expect from a Web app - authentication, databases and even live document editting.
@@ -31,7 +31,7 @@
         </Project>
 
         <Project id="smekystd" title="Smeky's TD" brief="Game, 2D Tower defense">
-            <ProjectImage :src="require('~/assets/images/smekystd.png')" />
+            <ProjectImage><img src="~/assets/images/smekystd.png" /></ProjectImage> 
             <ProjectDescription>
                 <p>
                     Made this one in my third year of high school and it was my first game ever!
@@ -40,14 +40,15 @@
                 </p>
 
                 <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
-                    <Link class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download now</Link>
+                    <Link class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download playable version</Link>
                 </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
         </Project>
 
         <Project id="arcana" title="Arcana" brief="Game, 2D Rogue-like RPG">
-            <ProjectImage :src="require('~/assets/images/arcana.png')"/>
+            <ProjectImage><img src="~/assets/images/arcana.png" /></ProjectImage>
+            
             <ProjectDescription>
                 <p>
                     My second game that I've been developing for over 7 months, still high school days.
@@ -58,17 +59,16 @@
                 </p>
 
                 <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
-                    <Link class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download now</Link>
+                    <Link class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download playable version</Link>
                 </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
         </Project>
 
         <Project title="My portfolio website!">
-            <ProjectImage />
             <ProjectDescription>
                 <p>
-                    Of course this website must not be missing!
+                    Of course this website must not be missing! Made in Nuxt (Vue), with Pixi.js for the background animations 
                 </p>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />

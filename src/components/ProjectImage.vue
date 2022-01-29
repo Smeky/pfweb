@@ -1,7 +1,6 @@
 <template>
     <div class="project-image">
-        <div class="img-placeholder" v-if="!src"></div>
-        <img :src="src" v-if="!!src" />
+        <slot></slot>
     </div>
 </template>
 
@@ -27,19 +26,5 @@
             max-width: 100%;
             height: auto;
         }
-
-        > .img-placeholder {
-            background-color: rgba(100, 100, 100, 0.2); 
-            width: 100%;
-            height: 100%;
-        }
     }
 </style>
-
-<script>
-    export default {
-        props: {
-            src: String,
-        },
-    }
-</script>
