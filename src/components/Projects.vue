@@ -71,7 +71,7 @@
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />
         </Project>
 
-        <Modal v-if="isTmtdModalShown" :onClose="tmtdModalClosed">
+        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
             <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
         </Modal>
     </div>
@@ -111,17 +111,6 @@
 
 <script>
     export default {
-        props: {
-            onModalOpen: {
-                type: Function,
-                required: true,
-            },
-            onModalClosed: {
-                type: Function,
-                required: true,
-            },
-        },
-
         data() {
             return {
                 isTmtdModalShown: false,
@@ -131,12 +120,10 @@
         methods: {
             showTmtdModal() {
                 this.isTmtdModalShown = true
-                this.onModalOpen()
             },
 
             tmtdModalClosed() {
                 this.isTmtdModalShown = false
-                this.onModalClosed()
             }
         }
     }

@@ -1,6 +1,7 @@
 <template>
     <div id="root">
-        <Background :isRunning="!isModalOpen" />
+        <canvas id="background"></canvas>
+
         <Page>
             <Introduction />
 
@@ -32,7 +33,7 @@
                 </Section>
 
                 <Section id="projects">
-                    <Projects :onModalOpen="onModalOpen" :onModalClosed="onModalClosed" />
+                    <Projects />
                 </Section>
             </div>
         </Page>
@@ -53,23 +54,12 @@
     export default {
         data() {
             return {
-                isModalOpen: false,
                 slides: false,
             }
         },
 
-        methods: {
-            onModalOpen() {
-                this.isModalOpen = true
-            },
-
-            onModalClosed() {
-                this.isModalOpen = false
-            }
-        },
-
         mounted() {
-            setTimeout(() => { this.slides = true }, 500)
+            // setTimeout(() => { this.slides = true }, 500)
         }
     }
 </script>

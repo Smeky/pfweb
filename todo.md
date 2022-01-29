@@ -11,7 +11,7 @@
 - ~~Get those projects runnig & take pictures / vids~~
 - Add Contact section
 - Add some nice links to github & linkedin
-- Some form of slide show to project's images / vids
+- ~~Some form of slide show to project's images / vids~~
 - ~~Give Play now some hint in !desktop mode that it will be available on desktops~~
 
 ### Styles
@@ -34,10 +34,9 @@
 ### Backend
 - Put together a way to serve TMTD
 
-
-
 ### Backlog
-- Fix Modal
-    - It shouldn't be in the DOM while open=false
-    - Prefer v-if on the Modal element instead of :open
-    - 
+- Make background async
+    - loading
+    - (re)gerenation of particles
+- Background might welcome some refactor - background controller, more functional approach
+    - Also handle HMR, currently it re-creates the background while leaving the old one there

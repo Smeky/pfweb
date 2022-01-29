@@ -86,13 +86,10 @@
 </style>
 
 <script>
-    export default {
-        data() {
-            return {
-                contentVisible: false
-            }
-        },
+    import bgControls from "~/mixins/bgControls.js"
 
+    export default {
+        mixins: [bgControls],
         props: {
             open: {
                 default: false,
@@ -104,6 +101,12 @@
             }
         },
         
+        data() {
+            return {
+                contentVisible: false
+            }
+        },
+    
         watch: {
             open(isOpen) {
                 this.handleOpenChange(isOpen)
@@ -120,9 +123,11 @@
             handleOpenChange(isOpen) {
                 if (isOpen) {
                     document.body.classList.add("modal-open")
+                    this.pauseBackground()
                 }
                 else {
                     document.body.classList.remove("modal-open")
+                    this.resumeBackground()
                 }      
             },
 

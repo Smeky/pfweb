@@ -119,7 +119,6 @@ function updateLines(lines, particles, connections) {
 
 export default class Background {
     States = {
-        Loading: "loading",
         Stopped: "stopped",
         Running: "running",
         Stopping: "stopping",
@@ -127,10 +126,7 @@ export default class Background {
     }
 
     constructor() {
-        this.state = this.States.Loading
-    
         this.state = this.States.Stopped
-        this.setup()
     }
 
     setup() {
@@ -140,7 +136,7 @@ export default class Background {
             width: window.innerWidth,
             height: window.innerHeight,
         })
-
+        
         const { width, height } = getPageSize()
         this.stageWidth = width
         this.stageHeight = height
