@@ -1,7 +1,10 @@
 <template>
     <div class="projects">
         <Project id="tmtd" title="TM TD" brief="Browser game, 2D Tower Defense">
-            <ProjectImage :src="require('~/assets/images/tmtd.png')" />
+            <ProjectImage
+                class="--clickable"
+                @click.native="slides = true" 
+                :src="require('~/assets/images/tmtd.png')" />
             <ProjectDescription>
                 <p>
                     A Tower Defense game in which I try to create several layers of mechanics to keep the gameplay interesting for more than just a few hours. The game design decision behind this is inspired mainly by Path of exile. 
@@ -10,7 +13,7 @@
                 </p>
 
                 <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to play right here">
-                    <Button class="project-button" @click.native="showTmtdModal">Play now</Button>
+                    <Button class="project-button" @click.native="() => { isTmtdModalShown = true }">Play now</Button>
                 </OnPlatform>
             </ProjectDescription>
         </Project>
@@ -71,7 +74,24 @@
             <SrcCodeLink href="https://github.com/Smeky/pfweb" />
         </Project>
 
-        <Modal :open="isTmtdModalShown" :onClose="tmtdModalClosed">
+        <Modal :open="slides" :onClose="() => slides = !slides">
+            <Slideshow v-slot="{ current }">
+                <Slide key="arcana" :currentSlide="current">
+                    <img src="~/assets/images/arcana.png" />
+                </Slide>
+                <Slide key="mythicplanner" :currentSlide="current">
+                    <img src="~/assets/images/mythicplanner.png" />
+                </Slide>
+                <Slide key="smekystd" :currentSlide="current">
+                    <img src="~/assets/images/smekystd.png" />
+                </Slide>
+                <Slide key="tmtd" :currentSlide="current">
+                    <img src="~/assets/images/tmtd.png" />
+                </Slide>
+            </Slideshow>
+        </Modal>
+
+        <Modal :open="isTmtdModalShown" :onClose="() => { isTmtdModalShown = !isTmtdModalShown }">
             <iframe src="http://localhost:9001/dist/index.html" width="1024" height="768" />
         </Modal>
     </div>
@@ -107,24 +127,19 @@
             }
         }
     }
+
+    .project-image.--clickable {
+        cursor: pointer;
+    }
 </style>
 
 <script>
     export default {
         data() {
             return {
+                slides: false,
                 isTmtdModalShown: false,
             }
         },
-
-        methods: {
-            showTmtdModal() {
-                this.isTmtdModalShown = true
-            },
-
-            tmtdModalClosed() {
-                this.isTmtdModalShown = false
-            }
-        }
     }
 </script>

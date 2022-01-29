@@ -4,23 +4,6 @@
 
         <Page>
             <Introduction />
-
-            <Modal :open="slides" :onClose="() => slides = !slides">
-                <Slideshow v-slot="{ current }">
-                    <Slide key="arcana" :currentSlide="current">
-                        <img src="~/assets/images/arcana.png" />
-                    </Slide>
-                    <Slide key="mythicplanner" :currentSlide="current">
-                        <img src="~/assets/images/mythicplanner.png" />
-                    </Slide>
-                    <Slide key="smekystd" :currentSlide="current">
-                        <img src="~/assets/images/smekystd.png" />
-                    </Slide>
-                    <Slide key="tmtd" :currentSlide="current">
-                        <img src="~/assets/images/tmtd.png" />
-                    </Slide>
-                </Slideshow>
-            </Modal>
             <Navigation />
 
             <div>
@@ -49,17 +32,3 @@
         align-items: center;
     }
 </style>
-
-<script>
-    export default {
-        data() {
-            return {
-                slides: false,
-            }
-        },
-
-        mounted() {
-            // setTimeout(() => { this.slides = true }, 500)
-        }
-    }
-</script>
