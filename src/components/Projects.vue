@@ -1,5 +1,17 @@
 <template>
     <div class="projects">
+        <Project id="mythicplanner" title="Mythic Planner" brief="Site, shared live editting">
+            <ProjectImage><img src="~/assets/images/mythicplanner.png" /></ProjectImage> 
+            <ProjectDescription>
+                <p>
+                    A website for planning Mythic+ dungeon routes in World of Warcraft I mad back in 2018. It involved everything you'd expect from a Web app - authentication, databases and even live document editting.
+                    <br/><br/>
+                    Express, MongoDB & socket.io (live editting) on Backend and React, MobX & Konva on the Frontend. 
+                </p>
+            </ProjectDescription>
+            <SrcCodeLink href="https://github.com/Smeky/MythicPlanner" />
+        </Project>
+
         <Project id="tmtd" title="TM TD" brief="Browser game, 2D Tower Defense">
             <ProjectImage class="--clickable" @click.native="slides = true">
                 <img src="~/assets/images/tmtd.png" />
@@ -16,18 +28,6 @@
                     <Button class="project-button" @click.native="() => { isTmtdModalShown = true }">Play now</Button>
                 </OnPlatform>
             </ProjectDescription>
-        </Project>
-
-        <Project id="mythicplanner" title="Mythic Planner" brief="Site, shared live editting">
-            <ProjectImage><img src="~/assets/images/mythicplanner.png" /></ProjectImage> 
-            <ProjectDescription>
-                <p>
-                    A website for planning Mythic+ dungeon routes in World of Warcraft I mad back in 2018. It involved everything you'd expect from a Web app - authentication, databases and even live document editting.
-                    <br/><br/>
-                    Express, MongoDB & socket.io (live editting) on Backend and React, MobX & Konva on the Frontend. 
-                </p>
-            </ProjectDescription>
-            <SrcCodeLink href="https://github.com/Smeky/MythicPlanner" />
         </Project>
 
         <Project id="smekystd" title="Smeky's TD" brief="Game, 2D Tower defense">
