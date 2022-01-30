@@ -29,7 +29,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import "~/styles/mixins.scss";
 
     $navbar-height: 44px;
