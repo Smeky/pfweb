@@ -5,17 +5,16 @@
             <img src="~/assets/images/menu.png" />
         </Button>
         
-        <div class="navbar">
+        <div class="section-name">
             <p>{{ navSection }}</p>
         </div>
 
         <div class="navlist-container">
             <transition name="navlist">
                 <div class="navlist" v-show="isOpen" ref="navlist">
-                    <Button v-for="item in navItems"
+                    <Button v-for="item in items"
                             noUnderline
-                            :href="item.id"
-                            v-bind:key="item.id"
+                            :key="item.id"
                             @click.native="scrollTo(item.id)">
                             
                         {{ item.label }}
@@ -31,14 +30,14 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
         z-index: 10;
+        width: 100%;
     }
     .navigation.--open {
         .menu-button {
             box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
         }
-        .navbar > p {
+        .section-name > p {
             opacity: 0.3;
         }
     }
@@ -52,7 +51,7 @@
         transition: box-shadow 0.3s;
     }
 
-    .navbar {
+    .section-name {
         width: 100%;
         height: 52px;
         display: inline-flex;
@@ -94,16 +93,17 @@
 
 <script>
     export default {
+        props: {
+            items: {
+                type: Array,
+                default: []
+            }
+        },
+
         data() {
             return {
-                isOpen: true,
+                isOpen: false,
                 navSection: "Home",
-                navItems: [
-                    { label: "Home",     id: "root" },
-                    { label: "About",    id: "about" },
-                    { label: "Skills",   id: "skills" },
-                    { label: "Projects", id: "projects" },
-                ],
             }
         },
 
@@ -121,8 +121,10 @@
             },
 
             handleScroll() {
+                // Todo: Can we store pos of all elements and compare to those?
+                //          - would skup getElementById
                 // Find which section we've scrolled to
-                const item = this.navItems.find((_, index, array) => {
+                const item = this.$props.items.find((_, index, array) => {
                     // Last element
                     if (index === array.length - 1) {
                         return true

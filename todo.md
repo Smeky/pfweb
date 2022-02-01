@@ -1,4 +1,13 @@
 
+## Todos 1.2.2022
+- Contact section
+    - Links to LinkedIn, GitHub
+    - Tel / mail
+- Finish navigation on desktop/tablet
+    - Change section margins so *current section name* fits better
+    - Navlist popup
+    - Transition of deskop menu (mid screen) into hamburger when scrolling
+
 ### Content
 - Finalize skills
     - Rethink their order, maybe different categorization
@@ -29,7 +38,7 @@
 - Implement Nuxt-image - img performance & device resolution
 - Add slideshow
 - Ensure the site works with slow throttling enabled
-- Add favicon
+- ~~Add favicon~~
 
 ### Backend
 - Put together a way to serve TMTD
@@ -39,4 +48,4 @@
     - loading
     - (re)gerenation of particles
 - Background might welcome some refactor - background controller, more functional approach
-    - Also handle HMR, currently it re-creates the background while leaving the old one there
+    - Also handle HMR, currently it re-creates the background while leaving the old instance of Pixi/webGL there (inproper cleanup?)

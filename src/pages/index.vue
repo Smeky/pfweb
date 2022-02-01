@@ -4,8 +4,7 @@
 
         <Page>
             <Introduction />
-            <NewNavigation />
-            <!-- <Navigation /> -->
+            <Navigation />
 
             <div>
                 <Section id="about">
