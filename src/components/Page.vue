@@ -10,7 +10,6 @@
     .page {
         padding: 0 30px;
         min-height: 100%;
-        margin-top: 50px;
         margin-bottom: 70px;
 
         @include res-desktop {

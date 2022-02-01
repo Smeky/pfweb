@@ -11,11 +11,6 @@
     .introduction {
         text-align: center;
         font-size: 24px;
-        margin-top: 100px;
-
-        @include res-tablet {
-            margin-bottom: 70px;
-        }
 
         p {
             display: inline-block;

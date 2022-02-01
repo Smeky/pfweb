@@ -4,9 +4,9 @@
     - Links to LinkedIn, GitHub
     - Tel / mail
 - Finish navigation on desktop/tablet
-    - Change section margins so *current section name* fits better
-    - Navlist popup
-    - Transition of deskop menu (mid screen) into hamburger when scrolling
+    - ~~Change section margins so *current section name* fits better~~
+    - ~~Navlist popup~~
+    - Highlight current scroll section
 
 ### Content
 - Finalize skills

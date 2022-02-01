@@ -3,22 +3,27 @@
         <canvas id="background"></canvas>
 
         <Page>
-            <Introduction />
+            <Section id="home">
+                <Introduction />
+            </Section>
+
             <Navigation />
 
-            <div>
-                <Section id="about">
-                    <About />
-                </Section>
-                
-                <Section id="skills">
-                    <Skills />
-                </Section>
+            <Section id="about">
+                <About />
+            </Section>
+            
+            <Section id="skills">
+                <Skills />
+            </Section>
 
-                <Section id="projects">
-                    <Projects />
-                </Section>
-            </div>
+            <Section id="projects">
+                <Projects />
+            </Section>
+
+            <Section id="contact">
+                Contact placeholder
+            </Section>
         </Page>
 
         <Footer />

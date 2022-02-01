@@ -6,7 +6,7 @@
         </Button>
         
         <div class="section-name">
-            <p>{{ navSection }}</p>
+            <p>{{ sectionName }}</p>
         </div>
 
         <div class="navlist-container">
@@ -97,44 +97,26 @@
             items: {
                 type: Array,
                 default: []
-            }
+            },
+            sectionId: String,
         },
 
         data() {
             return {
                 isOpen: false,
-                navSection: "Home",
             }
         },
 
-        mounted() {
-            window.addEventListener("scroll", this.handleScroll)
-        },
-
-        destroyed() {
-            window.removeEventListener("scroll", this.handleScroll)
+        computed: {
+            sectionName() {
+                const item = this.$props.items.find((item) => item.id === this.$props.sectionId)
+                return item.label
+            }
         },
 
         methods: {
             handleMenuClick() {
                 this.isOpen = !this.isOpen
-            },
-
-            handleScroll() {
-                // Todo: Can we store pos of all elements and compare to those?
-                //          - would skup getElementById
-                // Find which section we've scrolled to
-                const item = this.$props.items.find((_, index, array) => {
-                    // Last element
-                    if (index === array.length - 1) {
-                        return true
-                    }
-
-                    const nextEl = document.getElementById(array[index + 1].id)
-                    return nextEl.offsetTop - window.scrollY > 0;
-                })
-
-                this.navSection = item.label
             },
 
             scrollTo(id) {

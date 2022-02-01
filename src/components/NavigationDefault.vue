@@ -2,6 +2,7 @@
     <div ref="navbar" class="navigation" :class="{ '--sticky': isSticky }">
         <Button v-for="item in items"
                 :key="item.id"
+                :class="{ '--highlight': isSticky && item.id === sectionId }"
                 @click.native="scrollTo(item.id)">
                 
             {{ item.label }}
@@ -18,12 +19,18 @@
         width: 100%;
         z-index: 10;
         padding: 6px 0;
+        margin-top: 70px;
 
         > .button {
             font-size: 22px;
             text-align: center;
-            margin: 0 50px;
-            padding: 0;
+            margin: 0 30px;
+            padding: 0 8px;
+            transition: font-size 0.5s;
+
+            &.--highlight {
+                font-size: 25px;
+            }
         }
 
         &:before {
@@ -49,20 +56,21 @@
             items: {
                 type: Array,
                 default: []
-            }
+            },
+            sectionId: String,
         },
 
         data() {
             return {
-                isSticky: false,
+                isSticky: true,
             }
         },
 
         mounted() {
-            // Adds --sticky when position: sticky is active
+            // Triggers when position: sticky is dis/active
             // https://stackoverflow.com/a/57991537
             const observer = new IntersectionObserver(
-                ([el]) => el.target.classList.toggle("--sticky", el.intersectionRatio < 1),
+                ([el]) => { this.isSticky = el.intersectionRatio < 1 },
                 {
                     rootMargin: '-1px 0px 0px 0px',
                     threshold: [1] 
@@ -70,10 +78,6 @@
             )
 
             observer.observe(this.$refs.navbar)
-        },
-
-        destroyed() {
-
         },
 
         methods: {
