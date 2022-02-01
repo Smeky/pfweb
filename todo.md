@@ -6,7 +6,7 @@
 - Finish navigation on desktop/tablet
     - ~~Change section margins so *current section name* fits better~~
     - ~~Navlist popup~~
-    - Highlight current scroll section
+    - ~~Highlight current scroll section~~
 
 ### Content
 - Finalize skills
@@ -26,7 +26,7 @@
 ### Styles
 - ~~Font family~~
 - Try to find some better colors for background / general athmosfere
-- Side navbar should be more visible when there's not enough padding on the side
+- ~~Side navbar should be more visible when there's not enough padding on the side~~
 - ~~Bigger Play now button~~
 
 ### Background
