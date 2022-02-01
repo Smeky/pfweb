@@ -40,7 +40,10 @@
                 </p>
 
                 <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
-                    <Link class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download playable version</Link>
+                    <div class="download">
+                        <Link class="project-button" href="~/assets/files/Smeky's TD public ver 0.2.4.zip" download>Download</Link>
+                        <p class="download-hint">Smeky's TD public ver 0.2.4.zip</p>
+                    </div>
                 </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Tower-Defense-Game" />
@@ -59,7 +62,10 @@
                 </p>
 
                 <OnPlatform :enabled="$device.isDesktop" hint="Open on PC to download a playable version">
-                    <Link class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download playable version</Link>
+                    <div class="download">
+                        <Link class="project-button" href="~/assets/files/Arcana pre-alpha v0.07.zip" download>Download</Link>
+                        <p class="download-hint">Arcana pre-alpha v0.07.zip</p>
+                    </div>
                 </OnPlatform>
             </ProjectDescription>
             <SrcCodeLink href="https://github.com/Smeky/Arcana" />
@@ -117,6 +123,18 @@
 
         .platform {
             margin-top: 40px;
+        }
+
+        .download {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .download-hint {
+                font-size: 14px;
+                color: gray;
+                margin-top: 4px;
+            }
         }
 
         @include res-tablet {
