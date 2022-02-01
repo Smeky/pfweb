@@ -62,7 +62,7 @@
 
         data() {
             return {
-                isSticky: true,
+                isSticky: false,
             }
         },
 
