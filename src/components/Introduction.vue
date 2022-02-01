@@ -6,10 +6,16 @@
 </template>
 
 <style lang="scss">
+    @import "~/styles/mixins.scss";
+    
     .introduction {
         text-align: center;
         font-size: 24px;
-        padding: 60px 0 90px 0;
+        margin-top: 100px;
+
+        @include res-tablet {
+            margin-bottom: 70px;
+        }
 
         p {
             display: inline-block;

@@ -9,17 +9,10 @@
     @import "~/styles/mixins.scss";
 
     .section {
-        margin: 70px 0;
+        padding-top: 100px;
 
         @include res-desktop {
-            margin: 150px 0;
-        }
-
-        &:first-of-type {
-            margin-top: 0;
-        }
-        &:last-of-type {
-            margin-bottom: 0;
+            padding-top: 150px;
         }
     }
 
