@@ -49,6 +49,14 @@
         width: 40px;
         height: 40px;
         transition: box-shadow 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > img {
+            width: 32px;
+            height: 32px;
+        }
     }
 
     .section-name {
