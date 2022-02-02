@@ -26,7 +26,7 @@
         padding-left: 16px;
         padding-bottom: 12px;
         margin-bottom: 6px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(200, 200, 200, 0.1);
         font-size: 24px;
         font-weight: normal;
 

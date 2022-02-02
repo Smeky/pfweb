@@ -36,7 +36,7 @@
         .progress {
             height: $skill-progress-height;
             width: 100%;
-            background-color: #5b6078;
+            background-color: #2a3850;
             position: relative;
             top: calc(($skill-bg-height - $skill-progress-height) / 2);
             border-radius: calc($skill-bg-height / 2);
