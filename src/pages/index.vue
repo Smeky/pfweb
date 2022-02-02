@@ -7,6 +7,10 @@
                 <Introduction />
             </Section>
 
+            <Section id="contact">
+                <Contact />
+            </Section>
+
             <Navigation />
 
             <Section id="about">
@@ -19,10 +23,6 @@
 
             <Section id="projects">
                 <Projects />
-            </Section>
-
-            <Section id="contact">
-                Contact placeholder
             </Section>
         </Page>
 
